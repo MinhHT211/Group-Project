@@ -1,0 +1,76 @@
+<div class="main-content">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-wrapper">
+        <div class="breadcrumb-nav">
+        </div>
+    </div>
+
+    <!-- Head Lecturer / Regular Lecturer Info -->
+    <div id="headLecturerInfo" style="display: none;"></div>
+
+    <!-- Filter -->
+    <div class="filter-card">
+        <div class="filter-row">
+            <div class="filter-item flex-grow-1">
+                <label for="classSearch">Tìm kiếm</label>
+                <input type="text" id="classSearch" class="form-control" 
+                       placeholder="Mã lớp, tên lớp...">
+            </div>
+            <div class="filter-item lecturer-filter-item" style="display: none;">
+                <label for="lecturerFilter">Giảng viên</label>
+                <select id="lecturerFilter" class="form-control">
+                    <option value="">Tất cả giảng viên</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="classStatusFilter">Trạng thái</label>
+                <select id="classStatusFilter" class="form-control">
+                    <option value="">Tất cả</option>
+                    <option value="planning">Lên kế hoạch</option>
+                    <option value="open">Mở đăng ký</option>
+                    <option value="in_progress">Đang học</option>
+                    <option value="completed">Hoàn thành</option>
+                    <option value="cancelled">Đã hủy</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>&nbsp;</label>
+                <button type="button" class="btn-search" id="searchClassBtn">
+                    <i class="fa-solid fa-search"></i> Tìm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="margin-bottom: 15px; color: #666; font-size: 14px;">
+        Tổng: <strong id="totalClasses" style="color: #1565c0;">0</strong> lớp học
+    </div>
+
+    <!-- Table -->
+    <div class="main-card">
+        <div class="table-responsive">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">STT</th>
+                        <th style="width: 150px;">Mã lớp</th>
+                        <th>Tên lớp</th>
+                        <th style="width: 120px;">Khóa học</th>
+                        <th style="width: 150px;">Học kỳ</th>
+                        <th style="width: 150px;">Giảng viên</th>
+                        <th style="width: 100px;" class="text-center">Sĩ số</th>
+                        <th style="width: 120px;">Loại</th>
+                        <th style="width: 120px;">Trạng thái</th>
+                        <th style="width: 100px;" class="text-center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="classTableBody">
+                    <tr><td colspan="9" class="text-center"><i class="fa-solid fa-spinner fa-spin"></i> Đang tải...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-wrapper" id="pagination-class"></div>
+    </div>
+</div>
+<script type="module" src="/js/modules/lecturer/academic/class.js"></script>

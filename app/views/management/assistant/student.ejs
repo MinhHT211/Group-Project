@@ -1,0 +1,88 @@
+<div id="assistant-student-page" class="assistant-student-page">
+  <div class="student-index-container">
+    <div class="actions-row">
+      <button class="create-new-btn"><div>+</div>Create New</button>
+    </div>
+
+    <div class="search-filter-row">
+          <div class="search-group">
+      <label>Tìm kiếm</label>
+      <input type="text" class="search-keyword-input" placeholder="Tên, email, mã sinh viên...">
+    </div>
+    <div class="search-group">
+      <label >Major</label>
+      <select class="specialization-select">
+        <option value="">All Specialization</option>
+            <option value="SE">SE</option>
+            <option value="AI">AI</option>
+            <option value="IS">IS</option>
+            <option value="CS">CS</option>
+            <option value="MATH">MATH</option>
+            <option value="STAT">STAT</option>
+            <option value="PHY">PHY</option>
+            <option value="CHEM">CHEM</option>
+            <option value="ENG">ENG</option>
+      </select>
+    </div> 
+      
+      <button class="search-btn-main"> <i class="fa-solid fa-search"></i> Search</button>
+      <div class="inline-total">Total: <strong data-total="all">0</strong> students</div>
+
+    </div>
+
+    <table class="student-table">
+      <thead>
+          <tr>
+            <th style="width: 50px;">STT</th>
+            <th style="width: 200px;">Student Name</th>
+            <th style="width: 100px;">Student Id</th>
+            <th>Email</th>
+            <th style="width: 100px;">Date of Birth</th>
+            <th style="width: 50px;">Gender</th>
+            <th style="width: 200px;">Phone</th>
+            <th style="width: 100px;">Degree</th>
+            <th style="width: 50px;">Admission Year</th>
+            <th style="width: 250px;">Major</th>
+            <th style="width: 80px;">Status</th>
+            <th style="width: 150px;">Actions</th>
+            <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Tran Thi Thu</td>
+          <td>IT</td>
+          <td>
+            <button class="action-btn edit-btn">Edit</button>
+            <button class="action-btn delete-btn">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Hoang Van Bao</td>
+          <td>IT</td>
+          <td>
+            <button class="action-btn edit-btn">Edit</button>
+            <button class="action-btn delete-btn">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Ngo Thi Ha</td>
+          <td>BIS</td>
+          <td>
+            <button class="action-btn edit-btn">Edit</button>
+            <button class="action-btn delete-btn">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination">
+      <button id="prevPage">Prev</button>
+      <span id="pageInfo">Page 1 / 1</span>
+      <button id="nextPage">Next</button>
+    </div>
+
+  </div>
+</div>

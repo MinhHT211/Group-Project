@@ -1,0 +1,66 @@
+<div class="main-content">
+    <!-- Filter -->
+    <div class="filter-card">
+        <div class="filter-row">
+            <div class="filter-item flex-grow-1">
+                <label for="courseSearch">Tìm kiếm</label>
+                <input type="text" id="courseSearch" class="form-control" 
+                       placeholder="Mã khóa học, tên...">
+            </div>
+            <div class="filter-item">
+                <label for="courseTypeFilter">Loại</label>
+                <select id="courseTypeFilter" class="form-control">
+                    <option value="">Tất cả</option>
+                    <option value="mandatory">Bắt buộc</option>
+                    <option value="elective">Tự chọn</option>
+                    <option value="general">Đại cương</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="courseStatusFilter">Trạng thái</label>
+                <select id="courseStatusFilter" class="form-control">
+                    <option value="">Tất cả</option>
+                    <option value="true">Hoạt động</option>
+                    <option value="false">Ngừng</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>&nbsp;</label>
+                <button type="button" class="btn-search" id="searchCourseBtn">
+                    <i class="fa-solid fa-search"></i> Tìm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="margin-bottom: 15px; color: #666; font-size: 14px;">
+        Tổng: <strong id="totalCourses" style="color: #1565c0;">0</strong> khóa học
+    </div>
+
+    <!-- Table -->
+    <div class="main-card">
+        <div class="table-responsive">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">STT</th>
+                        <th style="width: 150px;">Mã</th>
+                        <th>Tên khóa học</th>
+                        <th style="width: 120px;">Loại</th>
+                        <th style="width: 120px;" class="text-center">Tín chỉ</th>
+                        <th style="width: 120px;" class="text-center">Lý thuyết</th>
+                        <th style="width: 120px;" class="text-center">Thực hành</th>
+                        <th style="width: 120px;">Trạng thái</th>
+                        <th style="width: 100px;" class="text-center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="courseTableBody">
+                    <tr><td colspan="9" class="text-center"><i class="fa-solid fa-spinner fa-spin"></i> Đang tải...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-wrapper" id="pagination-course"></div>
+    </div>
+</div>
+<script type="module" src="/js/modules/lecturer/academic/course.js"></script>

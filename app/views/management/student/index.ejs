@@ -1,0 +1,16 @@
+<div id="home-content" class="page-content active">
+    <%- include('../../components/banner') %>
+    <%- include('../../components/stats') %>
+    <%- include('../../components/news') %>
+</div>
+
+<script>
+  window.__APP__ = window.__APP__ || {};
+  window.__APP__.role = "<%= typeof role !== 'undefined' ? role : 'student' %>";
+  window.__APP__.currentUserId = "<%= (typeof currentUserId !== 'undefined' && currentUserId) ? currentUserId : '' %>";
+</script>
+
+<script src="/js/components/announcementSchedule.js"></script>
+<script>
+  announcementSchedule.init({ debug: false });
+</script>

@@ -1,0 +1,9 @@
+<div id="flash-messages" style="display: none;">
+    <% if (typeof messages !== 'undefined' && messages.length > 0) { %>
+        <% messages.forEach(function(msg) { %>
+            <div class="flash-message" 
+                 data-type="<%= msg.type %>" 
+                 data-title="<%= msg.title || '' %>"><%= msg.message %></div>
+        <% }); %>
+    <% } %>
+</div>

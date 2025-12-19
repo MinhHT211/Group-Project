@@ -1,0 +1,39 @@
+<header class="main-header">
+    <div class="user-profile">
+        <img src="<%= (typeof user !== 'undefined' && user.avatar) ? user.avatar : '/images/avatar_default.png' %>" 
+             alt="User Avatar" 
+             class="avatar">
+             
+        <div class="user-info">
+            <span class="user-name">
+                <%= (typeof user !== 'undefined' && user.name) ? user.name : 'Khách' %>
+            </span>
+            
+            <span class="user-role" 
+                  data-i18n-key="<%= (typeof user !== 'undefined' && user.roleKey) ? user.roleKey : 'role_guest' %>">
+                <%= (typeof user !== 'undefined' && user.roleText) ? user.roleText : 'Guest' %>
+            </span>
+        </div>
+    </div>
+
+    <div class="header-controls">
+        <div class="language-switcher">
+            <div class="language-selector" id="language-trigger">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg" alt="VN Flag" class="flag" id="current-flag">
+                <span id="current-lang">VN</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            
+            <div class="language-dropdown" id="language-dropdown-menu">
+                <a href="#" class="dropdown-item" data-lang="vi">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg" alt="VN Flag" class="flag">
+                    <span>Tiếng Việt</span>
+                </a>
+                <a href="#" class="dropdown-item" data-lang="en">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/1200px-Flag_of_the_United_Kingdom_%281-2%29.svg.png" alt="UK Flag" class="flag">
+                    <span>English</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,91 @@
+<div class="attendance-page">
+    <div class="page-header">
+        <div class="page-title">
+            <h2>
+                Lịch dạy ngày <span class="highlight-date"><%= new Date(currentDate).toLocaleDateString('vi-VN') %></span>
+            </h2>
+        </div>
+        <div class="header-actions">
+            <div class="date-picker-wrapper">
+                <input type="date" 
+                       id="attendanceDate" 
+                       class="form-control date-input"
+                       value="<%= currentDate %>" 
+                       onchange="changeDate(this.value)">
+            </div>
+        </div>
+    </div>
+
+    <% if (error) { %>
+        <div class="alert alert-error">
+            <div class="alert-icon">
+                <span class="material-symbols-outlined">error</span>
+            </div>
+            <div class="alert-content">
+                <h3>Đã xảy ra lỗi</h3>
+                <p><%= error %></p>
+            </div>
+        </div>
+    <% } %>
+
+    <div class="classes-grid">
+        <% if (classes && classes.length > 0) { %>
+            <% classes.forEach(cls => { %>
+                <% 
+                    let linkUrl = `/lecturer/attendance/classes/${cls.class_id}`;
+                    if (cls.schedules && cls.schedules.length > 0) {
+                        linkUrl += `?scheduleId=${cls.schedules[0].schedule_id}`;
+                    }
+                %>
+                
+                <a href="<%= linkUrl %>" class="class-card">
+                    <div class="card-body">
+                        <div class="card-top">
+                            <span class="class-code-badge">
+                                <%= cls.class_code %>
+                            </span>
+                            <span class="student-count">
+                                <span class="material-symbols-outlined icon-sm">group</span>
+                                <%= cls.current_enrollment %> / <%= cls.max_capacity %>
+                            </span>
+                        </div>
+                        
+                        <h3 class="course-name" title="<%= cls.class_name %>">
+                             <%= cls.class_name %>
+                        </h3>
+                        
+                        <div class="card-info">
+                            <div class="info-row">
+                                <span class="material-symbols-outlined icon-sm">schedule</span>
+                                <span class="info-text"><%= cls.start_time.slice(0,5) %> - <%= cls.end_time.slice(0,5) %></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="material-symbols-outlined icon-sm">location_on</span>
+                                <span class="info-text"><%= cls.room %></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <span class="footer-text">Điểm danh ngay</span>
+                        <span class="material-symbols-outlined icon-arrow">arrow_forward</span>
+                    </div>
+                </a>
+            <% }); %>
+        <% } else { %>
+            <div class="empty-state">
+                <span class="material-symbols-outlined empty-icon">calendar_today</span>
+                <h3 class="empty-title">Không có lịch dạy</h3>
+                <p class="empty-desc">Bạn không có lớp nào trong ngày <%= new Date(currentDate).toLocaleDateString('vi-VN') %>.</p>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<script>
+    function changeDate(dateStr) {
+        if (dateStr) {
+            window.location.href = `/lecturer/attendance?date=${dateStr}`;
+        }
+    }
+</script>

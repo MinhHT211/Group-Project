@@ -1,0 +1,224 @@
+.header {    
+    display: flex;    
+    justify-content: space-between;    
+    align-items: center;    
+    padding: 15px 30px;    
+    background-color: #ffffff;    
+    border-bottom: 1px solid #e0e0e0;    
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+    
+.header-left {    
+    display: flex;    
+    align-items: center;    
+    gap: 15px;
+}
+    
+.header-title {    
+    font-size: 1.5rem;    
+    font-weight: 700;    
+    color: #30408b;    
+    margin: 0;
+}
+.header-right {    
+    display: flex;    
+    align-items: center;    
+    gap: 20px;
+}
+.header-icon {    
+    font-size: 1.2rem;    
+    color: #666;    
+    cursor: pointer;    
+    transition: color 0.3s ease;
+}
+.header-icon:hover {    
+    color: #30408b;
+}
+.user-info {    
+    display: flex;    
+    align-items: center;    
+    gap: 10px;    
+    cursor: pointer;
+}
+.user-avatar {    
+    width: 40px;    
+    height: 40px;    
+    border-radius: 50%;    
+    background-color: #30408b;    
+    display: flex;    
+    align-items: center;    
+    justify-content: center;    
+    color: #ffffff;    
+    font-weight: 600;
+}
+.user-name {    
+    font-weight: 600;    
+    color: #333;
+}
+.user-role {    
+    font-size: 0.8rem;    
+    color: #888;
+}
+
+.language-switcher {
+    position: relative;
+}
+
+.language-dropdown {
+    display: none;
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    border: 1px solid #eee;
+    width: 150px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.language-dropdown.active {
+    display: block;
+}
+
+.language-dropdown .dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.language-dropdown .dropdown-item .flag {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.language-dropdown .dropdown-item:hover {
+    background-color: #f0f4f8;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 12px;
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.user-role {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.search-bar {
+    position: relative;
+}
+
+.search-bar input {
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    padding: 8px 15px;
+    padding-right: 35px;
+    font-size: 0.9rem;
+    background-color: #f9f9f9;
+}
+
+.search-bar input::placeholder {
+    color: #aaa;
+}
+
+.search-bar .search-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.notification-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.notification-icon .fa-bell {
+    font-size: 1.25rem;
+    color: #555;
+}
+
+.notification-dot {
+    position: absolute;
+    top: -2px;
+    right: -4px;
+    width: 8px;
+    height: 8px;
+    background-color: #e63946;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+}
+
+.language-selector {
+    display: flex;
+    align-items: center;
+    background-color: #f0f2f5;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid #e0e0e0;
+}
+
+.language-selector .flag {
+    width: 20px;
+    height: auto;
+    margin-right: 8px;
+    border-radius: 2px;
+}
+
+.language-selector span {
+    font-weight: 600;
+    color: #333;
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+.language-selector .fa-chevron-down {
+    font-size: 0.75rem;
+    color: #777;
+}

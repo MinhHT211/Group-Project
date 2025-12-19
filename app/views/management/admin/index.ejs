@@ -1,0 +1,28 @@
+<div class="page-content active">
+    <% try { %>
+        <%- include('../../components/banner') %>
+    <% } catch(e) { %>
+        <div style="padding: 20px; background: #fff; border-radius: 8px; margin-bottom: 20px;">
+            <h2>Welcome Banner</h2>
+            <p>Banner component will be displayed here.</p>
+        </div>
+    <% } %>
+    
+    <% try { %>
+        <%- include('../../components/stats') %>
+    <% } catch(e) { %>
+        <div style="padding: 20px; background: #fff; border-radius: 8px; margin-bottom: 20px;">
+            <h3>Statistics</h3>
+            <p>Stats component will be displayed here.</p>
+        </div>
+    <% } %>
+    
+    <% try { %>
+        <%- include('../../components/news') %>
+    <% } catch(e) { %>
+        <div style="padding: 20px; background: #fff; border-radius: 8px;">
+            <h3>News & Events</h3>
+            <p>News component will be displayed here.</p>
+        </div>
+    <% } %>
+</div>

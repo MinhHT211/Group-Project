@@ -1,0 +1,31 @@
+.login-btn-sign-in {
+    margin-top: var(--spacing-15);
+}
+
+/* .sign-in-text {
+    width: var(--button-width);
+    height: var(--button-height);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    background-color: var(--primary-color);
+    font-family: Archivo, sans-serif;
+    color: white;
+    font-size: var(--font-size-button);
+    cursor: pointer;
+} */
+.sign-in-text {
+    width: 100%;
+    max-width: 420px;              /* bằng với input */
+    height: 46px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    background-color: var(--primary-color);
+    font-family: Archivo, sans-serif;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0 auto;                /* căn giữa */
+}
+.sign-in-text:hover {
+    color: black;
+}

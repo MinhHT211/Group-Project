@@ -1,0 +1,149 @@
+<div class="main-content">
+    <!-- Page Header -->
+    <div class="page-header-block">
+        <h2 class="page-title">Khóa học</h2>
+        <button type="button" class="btn-primary-add" id="addCourseBtn">
+            <i class="fa-solid fa-plus"></i> Thêm khóa học
+        </button>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-card">
+        <div class="filter-row">
+            <div class="filter-item flex-grow-1">
+                <label for="courseSearch">Tìm kiếm</label>
+                <input type="text" id="courseSearch" class="form-control" 
+                       placeholder="Mã khóa học, tên...">
+            </div>
+            <div class="filter-item">
+                <label for="courseTypeFilter">Loại</label>
+                <select id="courseTypeFilter" class="form-control">
+                    <option value="">Tất cả</option>
+                    <option value="mandatory">Bắt buộc</option>
+                    <option value="elective">Tự chọn</option>
+                    <option value="general">Đại cương</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="courseStatusFilter">Trạng thái</label>
+                <select id="courseStatusFilter" class="form-control">
+                    <option value="">Tất cả</option>
+                    <option value="true">Hoạt động</option>
+                    <option value="false">Ngừng</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>&nbsp;</label>
+                <button type="button" class="btn-search" id="searchCourseBtn">
+                    <i class="fa-solid fa-search"></i> Tìm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="margin-bottom: 15px; color: #666; font-size: 14px;">
+        Tổng: <strong id="totalCourses" style="color: #1565c0;">0</strong> khóa học
+    </div>
+
+    <!-- Table -->
+    <div class="main-card">
+        <div class="table-responsive">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th style="width: 70px;">STT</th>
+                        <th style="width: 150px;">Mã</th>
+                        <th>Tên khóa học</th>
+                        <th style="width: 120px;">Loại</th>
+                        <th style="width: 120px;" class="text-center">Tín chỉ</th>
+                        <th style="width: 120px;" class="text-center">Lý thuyết</th>
+                        <th style="width: 120px;" class="text-center">Thực hành</th>
+                        <th style="width: 120px;">Trạng thái</th>
+                        <th style="width: 150px;" class="text-center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="courseTableBody">
+                    <tr><td colspan="8" class="text-center"><i class="fa-solid fa-spinner fa-spin"></i> Đang tải...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-wrapper" id="pagination-course"></div>
+    </div>
+
+    <!-- COURSE MODAL -->
+    <div class="modal-overlay" id="courseModal">
+        <div class="modal-content">
+            <button type="button" class="close-modal-btn" data-modal="course">&times;</button>
+            <h2 class="modal-title" id="courseModalTitle">Thêm khóa học</h2>
+            <form id="courseForm">
+                <div class="form-grid-layout">
+                    <div class="form-col">
+                        <h4>Thông tin cơ bản</h4>
+                        <div class="form-group">
+                            <label>Mã khóa học <span class="text-red">*</span></label>
+                            <input type="text" name="course_code" id="course_code" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tên khóa học <span class="text-red">*</span></label>
+                            <input type="text" name="course_name" id="course_name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Loại <span class="text-red">*</span></label>
+                            <select name="course_type" id="course_type" class="form-control" required>
+                                <option value="">-- Chọn --</option>
+                                <option value="mandatory">Bắt buộc</option>
+                                <option value="elective">Tự chọn</option>
+                                <option value="general">Đại cương</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Cấp độ</label>
+                            <select name="level" id="level" class="form-control">
+                                <option value="">-- Chọn --</option>
+                                <option value="beginner">Cơ bản</option>
+                                <option value="intermediate">Trung cấp</option>
+                                <option value="advanced">Nâng cao</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <h4>Chi tiết</h4>
+                        <div class="form-group">
+                            <label>Tín chỉ <span class="text-red">*</span></label>
+                            <input type="number" name="credits" id="credits" class="form-control" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Giờ lý thuyết</label>
+                            <input type="number" name="theory_hours" id="theory_hours" class="form-control" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Giờ thực hành</label>
+                            <input type="number" name="practice_hours" id="practice_hours" class="form-control" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Trạng thái</label>
+                            <select name="is_active" id="course_is_active" class="form-control">
+                                <option value="true">Hoạt động</option>
+                                <option value="false">Ngừng</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Mô tả</label>
+                    <textarea name="description" id="description" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Mục tiêu</label>
+                    <textarea name="learning_outcomes" id="learning_outcomes" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="modal-actions-footer">
+                    <button type="button" class="btn-cancel" data-modal="course">Hủy</button>
+                    <button type="submit" class="btn-save"><i class="fa-solid fa-save"></i> Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="module" src="/js/modules/assistant/academic/course.js"></script>

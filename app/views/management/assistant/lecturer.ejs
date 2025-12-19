@@ -1,0 +1,76 @@
+<input type="hidden" 
+       id="assistantDepartmentId" 
+       value="<%= (user && user.Assistant && user.Assistant.department_id) ? user.Assistant.department_id : '' %>">
+
+<!-- FILTER SECTION -->
+<div class="main-card filter-card">
+    <div class="filter-row">
+        <div class="filter-item">
+            <label>Tìm kiếm</label>
+            <input type="text" 
+                   id="searchInput" 
+                   class="form-control" 
+                   placeholder="Tên, email, mã giảng viên...">
+        </div>
+
+        <div class="filter-item">
+            <label>Trạng thái</label>
+            <select id="filterStatus" class="form-control">
+                <option value="">Tất cả</option>
+                <option value="true">Đang hoạt động</option>
+                <option value="false">Ngừng hoạt động</option>
+            </select>
+        </div>
+
+        <div class="filter-item">
+            <button onclick="performSearch()" class="btn-search">
+                <i class="fa-solid fa-search"></i> Tìm kiếm
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- DATA TABLE -->
+<div class="main-card mt-20">
+    <div class="table-header">
+        <div class="table-info">
+            <span id="totalRecords">Tổng: 0 giảng viên</span>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Họ và tên</th>
+                    <th>Mã GV</th>
+                    <th>Email</th>
+                    <th>Ngày sinh</th>
+                    <th>Giới tính</th>
+                    <th>SĐT</th>
+                    <th>Bằng cấp</th>
+                    <th>Học hàm</th>
+                    <th>Khoa</th>
+                    <th>Trạng thái</th>
+                    <th>Phòng</th>
+                </tr>
+            </thead>
+            <tbody id="lecturerTableBody">
+                <tr>
+                    <td colspan="11" class="text-center">
+                        <i class="fa-solid fa-spinner fa-spin"></i> Đang tải...
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination-wrapper" id="paginationWrapper" style="display: none;">
+        <div class="pagination-info">
+            <span id="paginationInfo"></span>
+        </div>
+        <div class="pagination-controls" id="paginationControls"></div>
+    </div>
+</div>

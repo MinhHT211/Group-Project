@@ -1,0 +1,95 @@
+/* --- GRID CONTAINER --- */
+.class-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+    gap: 25px;
+    padding-bottom: 40px;
+}
+
+/* --- CLASS CARD (Thẻ lớp học) --- */
+.class-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    padding: 20px;
+    border: 1px solid #f0f0f0;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.class-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border-color: #e0e0e0;
+}
+
+/* --- HEADER CỦA CARD --- */
+.card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+/* Tag năm học (Năm 1, Năm 2...) */
+.year-tag {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Màu sắc cho các năm khác nhau */
+.year-tag.year-1 { background-color: #e3f2fd; color: #2196f3; } /* Xanh dương */
+.year-tag.year-2 { background-color: #fff3e0; color: #ff9800; } /* Cam */
+.year-tag.year-3 { background-color: #ffebee; color: #f44336; } /* Đỏ */
+.year-tag.year-4 { background-color: #f3e5f5; color: #9c27b0; } /* Tím */
+
+/* Icon trạng thái (Check xanh, Chấm than cam...) */
+.status-icon {
+    font-size: 1.2rem;
+}
+.status-icon.success { color: #2ecc71; } /* Xanh lá */
+.status-icon.warning { color: #ff9800; } /* Cam */
+.status-icon.error { color: #bdc3c7; }   /* Xám */
+
+/* --- NỘI DUNG CHÍNH --- */
+.class-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 5px 0;
+    line-height: 1.4;
+}
+
+.class-code {
+    font-size: 0.9rem;
+    color: #888;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* --- THÔNG TIN CHI TIẾT (Giờ, Phòng) --- */
+.class-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f5f5f5;
+    padding-top: 15px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-item i {
+    color: #bbb;
+}

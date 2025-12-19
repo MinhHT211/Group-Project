@@ -1,0 +1,185 @@
+/* =========================================
+   1. MAIN FOOTER CONTAINER
+   ========================================= */
+
+/* LƯU Ý: Tên class phải là .main-footer để khớp với file EJS */
+.main-footer {
+    /* QUAN TRỌNG: Xóa bỏ lề trái do code cũ */
+    margin-left: 0 !important; 
+    width: 100% !important;
+
+    /* Đẩy footer xuống đáy */
+    margin-top: auto;
+
+    /* Giao diện */
+    background-color: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 40px;
+    color: #555;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* =========================================
+   2. CONTENT LAYOUT (4 Cột)
+   ========================================= */
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
+    justify-content: space-between; /* Chia đều khoảng cách */
+    gap: 30px;
+    
+    /* Căn giữa và giới hạn độ rộng */
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px 30px 30px;
+}
+
+/* Các cột bên trong */
+.footer-column {
+    flex: 1;            /* Co giãn đều */
+    min-width: 200px;   /* Đảm bảo không bị bóp quá bé */
+}
+
+/* Cột 1: Logo & About (Cần rộng hơn chút) */
+.footer-about {
+    flex: 1.5; 
+    min-width: 250px;
+}
+
+.footer-logo {
+    max-width: 180px; /* Chỉnh lại kích thước logo */
+    height: auto;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.footer-about p {
+    line-height: 1.5;
+    color: #6c757d;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Tiêu đề các cột */
+.footer-column h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 20px;
+    text-transform: uppercase; /* Chữ in hoa cho đẹp */
+    letter-spacing: 0.5px;
+}
+
+/* =========================================
+   3. LINKS & CONTACT LISTS
+   ========================================= */
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start; /* Căn icon thẳng hàng với dòng đầu tiên */
+}
+
+.footer-column a {
+    text-decoration: none;
+    color: #555;
+    transition: all 0.2s ease;
+}
+
+.footer-column a:hover {
+    color: #0d6efd; /* Màu xanh USTH */
+    padding-left: 5px;
+}
+
+/* Icon liên hệ */
+.footer-contact i {
+    color: #0d6efd;
+    width: 25px;
+    margin-top: 4px;
+}
+
+/* =========================================
+   4. SOCIAL MEDIA (Cột 4)
+   ========================================= */
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 50%; /* Hình tròn */
+    color: #555;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background-color: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+    transform: translateY(-3px); /* Hiệu ứng bay lên nhẹ */
+}
+
+/* =========================================
+   5. BOTTOM COPYRIGHT
+   ========================================= */
+
+.footer-bottom {
+    background-color: #f1f3f5;
+    border-top: 1px solid #e9ecef;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between; /* Đẩy bản quyền sang trái, links sang phải */
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+.footer-bottom-links a {
+    text-decoration: none;
+    color: #6c757d;
+    margin: 0 5px;
+}
+
+.footer-bottom-links a:hover {
+    color: #0d6efd;
+    text-decoration: underline;
+}
+
+/* =========================================
+   6. RESPONSIVE (Mobile)
+   ========================================= */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Xếp chồng lên nhau trên mobile */
+        gap: 40px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}

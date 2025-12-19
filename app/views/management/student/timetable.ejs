@@ -1,0 +1,129 @@
+<div id="timetable-content" class="page-content active">
+    <div class="timetable-controls">
+        <div class="controls-wrapper">
+    
+            <div class="controls-left">
+                <button id="todayBtn" class="control-btn">Today</button>
+                <div class="view-switcher">
+                    <button id="viewMonthBtn" class="view-btn active">Month</button>
+                    <button id="viewWeekBtn" class="view-btn">Week</button>
+                </div>
+            </div>
+    
+            <div class="controls-right">
+                <button id="refreshScheduleBtn" class="control-btn refresh-btn">
+                    <i class="fa-solid fa-arrows-rotate"></i> Refresh
+                </button>
+            </div>
+    
+        </div>
+    </div>
+    <div class="main-container">
+        <!-- calendar -->
+        <div class="calendar">
+            <div class="header">
+                <div class="nav-group">
+                    <button id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="monthYear clickable" id="monthYear"></div>
+                    <button id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <div class="filter-toolbar">
+                <div class="filter-group">
+                    <i class="fa-solid fa-book filter-icon"></i>
+                    <select id="courseFilterSelect" class="filter-select">
+                        <option value="">All Courses</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down custom-arrow"></i>
+                </div>
+            </div>
+        
+            <div id="monthViewContainer">
+                <div class="days">
+                    <div class="day">Mon</div>
+                    <div class="day">Tue</div>
+                    <div class="day">Wed</div>
+                    <div class="day">Thu</div>
+                    <div class="day">Fri</div>
+                    <div class="day">Sat</div>
+                    <div class="day">Sun</div>
+                </div>
+                <div class="dates" id="dates"></div>
+            </div>
+            
+            <div id="weekViewContainer" class="week-view" style="display: none;">
+                <div class="week-header" id="weekHeader"></div>
+            
+                <div class="week-body">
+                    <div class="time-labels">
+                        <div>05:00</div>
+                        <div>06:00</div>
+                        <div>07:00</div>
+                        <div>08:00</div>
+                        <div>09:00</div>
+                        <div>10:00</div>
+                        <div>11:00</div>
+                        <div>12:00</div>
+                        <div>13:00</div>
+                        <div>14:00</div>
+                        <div>15:00</div>
+                        <div>16:00</div>
+                        <div>17:00</div>
+                        <div>18:00</div>
+                    </div>
+                    <div class="week-grid" id="weekGrid"></div>
+                </div>
+            </div>
+        
+            <div id="monthPicker" class="month-picker">
+                <div class="picker-header">
+                    <button id="pickerPrevYear"><i class="fa-solid fa-chevron-left"></i></button>
+                    <span id="pickerYearDisplay">2025</span>
+                    <button id="pickerNextYear"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="months-grid">
+                    <div class="month-item" data-month="0">Jan</div>
+                    <div class="month-item" data-month="1">Feb</div>
+                    <div class="month-item" data-month="2">Mar</div>
+                    <div class="month-item" data-month="3">Apr</div>
+                    <div class="month-item" data-month="4">May</div>
+                    <div class="month-item" data-month="5">Jun</div>
+                    <div class="month-item" data-month="6">Jul</div>
+                    <div class="month-item" data-month="7">Aug</div>
+                    <div class="month-item" data-month="8">Sep</div>
+                    <div class="month-item" data-month="9">Oct</div>
+                    <div class="month-item" data-month="10">Nov</div>
+                    <div class="month-item" data-month="11">Dec</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- detail -->
+        <div class="schedule-detail">
+            <div class="detail-header">
+                <h3 id="selectedDate">Today</h3>
+            </div>
+            <div class="schedule-list" id="scheduleList">
+                <div class="no-schedule">
+                    <i class="fa-regular fa-calendar"></i>
+                    <p>No schedule</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Timetable CSS -->
+
+
+<!-- Timetable JavaScript -->
+<script>
+    // Set role for JavaScript
+    window.USER_ROLE = 'student';
+    console.log('=== Student Timetable Loaded ===');
+    console.log('USER_ROLE:', window.USER_ROLE);
+</script>
+
+
+

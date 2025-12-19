@@ -1,0 +1,157 @@
+/* ====== Palette & base ====== */
+:root {
+  --bg: #f6f8fc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e6e9f2;
+  --shadow: 0 4px 12px rgba(2, 6, 23, .04);
+  --primary: #4A90E2;
+  --primary-weak: #e9f0ff;
+  --primary-strong: #1d4ed8;
+  --radius: 12px;
+}
+
+/* Wrapper */
+.student-form-page,
+#student-edit-page,
+.assistant-student-page {
+  width: 100%;
+  padding: 0 20px 40px;
+  background: transparent;
+  margin-top: 0;
+}
+
+/* Title */
+.page-title {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 24px;
+  color: #1a1a1a;
+}
+
+/* Container */
+.student-index-container {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 30px;
+  max-width: 1100px;
+  margin: 0;
+}
+
+/* Form Layout */
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+form h3 {
+  grid-column: 1 / -1;
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: 700;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--border);
+}
+
+/* Field */
+form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Label */
+label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: default; /* label không cần pointer */
+}
+
+/* Input */
+input,
+select,
+textarea {
+  height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  font-size: 14px;
+  width: 100%;
+  cursor: text; /* chuẩn UX */
+}
+
+/* Select & clickable inputs */
+select,
+input[type="date"],
+input[type="number"] {
+  cursor: pointer;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-weak);
+}
+
+/* Disabled field */
+input:disabled,
+select:disabled {
+  background: #f8fafc;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Footer Actions */
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+/* Primary button */
+.create-new-btn {
+  background: var(--primary);
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background .15s ease, transform .05s ease;
+}
+
+.create-new-btn:hover {
+  background: var(--primary-strong);
+}
+
+.create-new-btn:active {
+  transform: translateY(1px);
+}
+
+/* Back link */
+.link-back {
+  padding: 8px 16px;
+  color: var(--muted);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.link-back:hover {
+  background: #f1f5f9;
+  color: var(--text);
+}

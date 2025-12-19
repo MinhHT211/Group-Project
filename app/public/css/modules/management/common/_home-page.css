@@ -1,0 +1,235 @@
+.welcome-banner {
+    background-color: #30408b; 
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.banner-heading {
+    padding: 10px 0;
+    text-align: center;   
+}
+
+.banner-heading h1 {
+    color: #ffffff;      
+    font-family: "Times New Roman", Times, serif; 
+    font-weight: 800;     
+    font-size: 2.2rem;  
+    line-height: 1.5;   
+    margin: 0;          
+}
+
+.highlight-yellow {
+    color: #FDE047; 
+}
+
+.highlight-red {
+    color: #FF5A60; 
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px 0;
+    flex-wrap: wrap;
+}
+
+.accreditation-card {
+    background-color: #ffffff;
+    color: #333;
+    border-radius: 12px;
+    padding: 24px;
+    width: 300px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card-logo {
+    background-color: #0052cc;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+}
+
+.card-status {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #222;
+    margin-bottom: 8px;
+}
+
+.card-description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+.achievement-details {
+    max-width: 450px;
+    color: #ffffff;
+}
+
+.achievement-details h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.achievement-details p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.banner-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    flex-wrap: wrap; 
+    gap: 20px; 
+    background-color: #ffffff;
+    padding: 30px 20px;
+    margin-top: 20px; 
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    min-width: 150px; 
+}
+
+.stat-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    color: #ffffff; 
+    font-size: 1.8rem;
+}
+
+.stat-number {
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #aaaaaa; 
+    font-weight: 500;
+}
+
+.news-events {
+    margin-top: 30px;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-heading h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.section-heading p {
+    font-size: 1rem;
+    color: #777;
+    margin: 0;
+}
+
+.news-grid {
+    display: flex;
+    justify-content: center; 
+    gap: 24px; 
+    flex-wrap: wrap; 
+}
+
+.news-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    width: 350px; 
+    overflow: hidden; 
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.news-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+}
+
+.card-content {
+    padding: 24px;
+}
+
+.card-meta {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.card-meta i {
+    margin-right: 5px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #222;
+    margin: 0 0 10px 0;
+}
+
+.card-excerpt {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+    margin: 0 0 15px 0;
+}
+
+.card-link {
+    text-decoration: none;
+    color: #4A90E2;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.card-link:hover {
+    text-decoration: underline;
+}

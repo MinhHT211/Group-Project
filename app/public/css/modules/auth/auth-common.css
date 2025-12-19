@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--primary-color);
+}
+
+/* Form container - khung trắng */
+.form-container {
+    background-color: var(--bg-white);
+    /* padding: var(--spacing-20); */
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    /* width: var(--form-width); */
+    text-align: center;
+    width: 450px;          /* trước là 380px → to hơn nhiều */
+    padding: 35px 40px;    /* tăng padding cho thoáng */
+}
+
+
+
+/* Title chung */
+.login-text {
+    font-size: var(--font-size-title-large);
+}
+
+/* Span chung */
+span {
+    color: var(--text-secondary);
+}
+
+/* Link chung */
+.signup-link {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+.back2 {
+    font-size: var(--font-size-large);
+    text-decoration: none;
+}

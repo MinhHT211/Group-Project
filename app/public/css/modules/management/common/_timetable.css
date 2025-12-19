@@ -1,0 +1,1401 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap");
+
+:root {
+    /* --- SYNC WITH FOOTER COLORS --- */
+    --primary-color: #4A90E2;
+    --primary-hover: #357ABD;
+    --bg-white: #ffffff;
+    --bg-light: #f8f9fa;
+    --bg-darker: #f0f2f5;
+
+    --text-heading: #333333;
+    --text-body: #555555;
+    --text-muted: #888888;
+
+    --border-color: #e0e0e0;
+
+    /* Status Colors */
+    --danger-color: #f44336;
+    --danger-bg: #ffebee;
+    --warning-color: #FF9800;
+    --success-color: #4CAF50;
+    --info-color: #2196F3;
+    --info-bg: #e3f2fd;
+    --purple-color: #9C27B0;
+
+    /* Dimensions */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --calendar-width: 380px;
+    --detail-width: 600px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+
+body {
+    min-height: 100vh;
+    display: block;
+    background: var(--bg-white);
+    color: var(--text-body);
+}
+
+/* --- Layout Main Container --- */
+.main-container {
+    /* padding-top: 100px; */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 100%;
+    margin: 0 auto;
+    transition: margin-left 0.3s ease;
+}
+
+body.sidebar-collapsed .main-container {
+    margin-left: 70px;
+}
+
+.calendar {
+    width: 100%;
+    max-width: var(--calendar-width);
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.monthYear {
+    text-align: center;
+    font-weight: 700;
+    color: var(--text-heading);
+    width: auto;
+    min-width: 150px;
+    padding: 0 10px;
+    font-size: 1.1rem;
+}
+
+.calendar .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.nav-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.month-picker {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 60px);
+    background: var(--bg-white);
+    z-index: 10;
+    padding: 10px;
+    animation: fadeIn 0.2s;
+}
+
+.month-picker.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.picker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--text-heading);
+}
+
+.picker-header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 5px 10px;
+    color: var(--text-body);
+}
+
+.months-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    flex: 1;
+}
+
+.month-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s;
+    background-color: var(--bg-light);
+    color: var(--text-body);
+}
+
+.month-item:hover {
+    background-color: #e3f2fd;
+    color: var(--primary-color);
+}
+
+.month-item.selected {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Navigation Buttons */
+.calendar .header button {
+    width: auto;          
+    height: auto;
+    border-radius: var(--radius-sm); 
+    padding: 6px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    color: var(--text-body);
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.calendar .header button:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--bg-white);
+}
+
+.calendar .header button i {
+    font-size: 12px;
+    color: inherit;
+}
+
+.today-btn:hover {
+    background: var(--primary-color);
+    color: var(--bg-white);
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2);
+}
+.monthYear:hover {
+    color: var(--primary-color);
+    cursor: pointer;
+    border-color: var(--bg-white);
+    transform: scale(1.05);
+}
+
+/* Days Grid */
+.days,
+.dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.days {
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.dates {
+    height: 264px;
+}
+
+.day {
+    text-align: center;
+    padding: 5px;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid transparent;
+    color: var(--text-body);
+}
+
+.date:hover {
+    background: var(--bg-light);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Date States */
+.date.active {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: var(--bg-white);
+    font-weight: 700;
+}
+.date.active:hover {
+    background: var(--primary-color);
+    color: var(--bg-white);
+    border-color: var(--primary-color);
+}
+
+.date.selected {
+    background: var(--primary-color);
+    color: var(--bg-white);
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 6px rgba(74, 144, 226, 0.4);
+}
+
+.date.inactive {
+    color: #e0e0e0;
+}
+
+.date.inactive:hover {
+    color: var(--text-muted);
+    background: transparent;
+    border-color: transparent;
+}
+
+/* Indicators */
+.date.has-schedule::after,
+.date.has-cancelled::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+}
+
+.date.has-schedule::after {
+    background: var(--danger-color);
+}
+
+.date.has-cancelled::after {
+    background: var(--warning-color);
+}
+/* --- Toast Notification --- */
+.toast-notification {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background: #323232; 
+    color: #ffffff;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 9999; /* Luôn nổi lên trên cùng */
+    font-size: 0.95rem;
+    border-left: 5px solid var(--warning-color); 
+    /* Animation trượt từ phải sang */
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.toast-notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-notification i {
+    font-size: 1.2rem;
+    color: var(--warning-color);
+}
+
+/* --- Filter Toolbar --- */
+.filter-toolbar {
+    display: flex;
+    gap: 15px;
+    padding: 10px 15px;
+    background-color: var(--bg-light);
+    /* Màu nền nhẹ để tách biệt */
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 10px;
+}
+
+/* Style chung cho ô lọc (Update từ code cũ) */
+.filter-group {
+    position: relative;
+    flex: 1;
+    /* Chia đều chiều rộng */
+    display: flex;
+    align-items: center;
+}
+
+.filter-icon {
+    position: absolute;
+    left: 12px;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.filter-select {
+    width: 100%;
+    padding: 8px 30px 8px 36px;
+    /* Chừa chỗ cho icon */
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    /* Bo tròn */
+    font-size: 0.85rem;
+    color: var(--text-heading);
+    background-color: var(--bg-white);
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.2s;
+}
+
+.filter-select:hover {
+    border-color: var(--primary-color);
+}
+
+.custom-arrow {
+    position: absolute;
+    right: 12px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+/* Responsive: Trên mobile thì cho nó full dòng */
+@media (max-width: 600px) {
+    .header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .filter-group {
+        max-width: 100%;
+        order: 3;
+        /* Đẩy xuống dưới cùng của header */
+    }
+}
+
+/* --- Schedule Detail Component --- */
+.schedule-detail {
+    width: 100%;
+    max-width: var(--detail-width);
+    height: auto;
+    max-height: 840px;
+    background: var(--bg-white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-header h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-heading);
+}
+
+.detail-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.schedule-list {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.schedule-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.schedule-list::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
+
+.no-schedule {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+}
+
+.no-schedule i {
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: #d1d1d1;
+}
+
+/* --- Schedule Card --- */
+.schedule-card {
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--primary-color);
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+}
+
+.schedule-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    border-color: #de3163;
+}
+
+.schedule-card.cancelled {
+    background: var(--danger-bg);
+    border-left-color: var(--danger-color);
+    border-color: #ffcdd2;
+    opacity: 0.9;
+}
+
+.schedule-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.schedule-card.cancelled h4 {
+    color: var(--danger-color);
+    text-decoration: line-through;
+}
+
+.schedule-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-body);
+    line-height: 1.4;
+}
+
+.info-item i {
+    width: 16px;
+    color: var(--primary-color);
+    margin-top: 3px;
+}
+
+.schedule-card.cancelled .info-item,
+.schedule-card.cancelled .info-item i {
+    color: var(--text-muted);
+}
+
+/* Badges */
+.cancelled-badge,
+.type-badge,
+.recurring-badge,
+.online-badge,
+.restored-badge {
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 8px;
+    letter-spacing: 0.5px;
+}
+
+.cancelled-badge {
+    background: var(--danger-color);
+    font-weight: 600;
+}
+
+.type-badge {
+    background: var(--info-color);
+    font-weight: 500;
+}
+
+.recurring-badge {
+    background: var(--purple-color);
+    font-weight: 500;
+}
+
+.online-badge {
+    background: var(--success-color);
+    padding: 2px 6px;
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+.restored-badge {
+    background: var(--success-color);
+}
+
+/* Action Buttons within Card */
+.schedule-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #e6e6e6;
+    flex-wrap: wrap;
+}
+
+.schedule-actions button {
+    padding: 6px 14px;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: 0.3s;
+    color: var(--bg-white);
+    font-weight: 500;
+}
+
+.schedule-actions .btn-edit {
+    background: var(--info-color);
+}
+
+.schedule-actions .btn-edit:hover {
+    background: #1976D2;
+}
+
+.schedule-actions .btn-delete {
+    background: var(--danger-color);
+}
+
+.schedule-actions .btn-delete:hover {
+    background: #d32f2f;
+}
+
+.schedule-actions .btn-cancel-schedule {
+    background: var(--warning-color);
+}
+
+.schedule-actions .btn-cancel-schedule:hover {
+    background: #F57C00;
+}
+
+.schedule-actions .btn-restore {
+    background: var(--success-color);
+}
+
+.schedule-actions .btn-restore:hover {
+    background: #388E3C;
+}
+
+/* --- Buttons --- */
+.add-btn {
+    background: var(--primary-color);
+    color: var(--bg-white);
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.3);
+}
+
+.add-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--bg-white);
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.btn-secondary {
+    background: #e0e0e0;
+    color: var(--text-heading);
+}
+
+.btn-secondary:hover {
+    background: #d0d0d0;
+}
+
+/* --- Modals --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    animation: fadeIn 0.3s;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--bg-white);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.3s;
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-light);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: var(--text-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.close-btn:hover {
+    color: var(--danger-color);
+    background-color: rgba(244, 67, 54, 0.1);
+}
+
+.modal-body {
+    padding: 25px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+}
+
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.modal-footer {
+    padding: 15px 25px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    background-color: var(--bg-light);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-body);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    color: var(--text-heading);
+    background: var(--bg-white);
+    transition: 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Checkbox */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    color: var(--text-body);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.online-option-group {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Info Boxes */
+.recurring-options {
+    margin-top: 15px;
+    padding: 15px;
+    background: var(--bg-light);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.single-date-info {
+    margin-top: 15px;
+    padding: 12px;
+    background: var(--info-bg);
+    border-left: 4px solid var(--info-color);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #1565C0;
+}
+
+/* Action Modal Specifics */
+#actionThisDay,
+#actionAllDays {
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+#actionThisDay {
+    background: var(--info-color);
+    color: var(--bg-white);
+}
+
+#actionThisDay:hover {
+    background: #1976D2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(33, 150, 243, 0.25);
+}
+
+#actionAllDays {
+    background: var(--bg-light);
+    color: var(--text-body);
+    border-color: var(--border-color);
+}
+
+#actionAllDays:hover {
+    background: #ebebeb;
+    border-color: #ccc;
+}
+
+#scheduleForm {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* Date Range Display */
+.date-range-info {
+    color: #9C27B0;
+}
+
+.date-range-info i {
+    color: #9C27B0;
+}
+
+/* Online Meeting Link */
+.online-meeting-link {
+    color: #2196F3;
+    text-decoration: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+
+    /* Khi màn hình nhỏ, reset margin để full width */
+    body {
+        display: block;
+    }
+
+    .main-container {
+        margin-left: 0;
+        /* Xóa margin-left để không bị lệch */
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .calendar,
+    .schedule-detail {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* full-hd 14inch - scale 150% */
+@media screen and (max-width: 1400px) {
+
+    /* 1. Thu nhỏ padding của container chính để tận dụng diện tích */
+    .timetable-controls {
+        padding: 8px 0 !important; /* Gốc là 15px */
+        margin-bottom: 10px !important;
+        position: relative; /* Đảm bảo nó nổi lên */
+        z-index: 10;
+    }
+
+    .controls-wrapper {
+        padding: 0 10px !important;
+        flex-wrap: wrap; /* Cho phép xuống dòng nếu quá chật */
+        gap: 10px;       /* Khoảng cách khi xuống dòng */
+    }
+
+    /* 2. Thu nhỏ chiều cao các nút bấm */
+    .control-btn {
+        height: 34px !important; /* Gốc 38px -> Giảm xuống 34px */
+        padding: 0 10px !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* 3. Thu nhỏ bộ chuyển đổi View (Month/Week) */
+    .view-switcher {
+        height: 34px !important;
+    }
+    .view-btn {
+        padding: 0 10px !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* 4. Chỉnh lại chữ tháng năm cho đỡ chiếm chỗ */
+    .monthYear {
+        font-size: 1rem !important;
+        min-width: 120px !important; /* Cho phép co lại nhỏ hơn */
+        padding: 0 5px !important;
+    }
+
+    /* 5. (Quan trọng) Ép hiển thị flex row để không bị vỡ layout */
+    .controls-left, .controls-right {
+        gap: 8px !important;
+    }
+
+    /* 6. Nếu Main Container bị margin lớn quá thì giảm bớt */
+    .main-container {
+        gap: 15px !important; /* Gốc là 30px */
+    }
+}
+/* 2k */
+@media (min-width: 1921px) {
+    .main-container {
+        zoom: 1.15;
+    }
+}
+
+/* 4K (Width > 2560px) */
+@media (min-width: 2561px) {
+    .main-container {
+        zoom: 1.2;
+    }
+}
+.view-switcher {
+    display: flex;
+    background: var(--bg-light);
+    padding: 3px;
+    border-radius: 8px;
+    gap: 5px;
+}
+
+.view-btn {
+    padding: 6px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.view-btn.active {
+    background: var(--bg-white);
+    color: var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    font-weight: 600;
+}
+
+/* --- [MỚI] Week View Layout --- */
+.week-view {
+    display: flex;
+    flex-direction: column;
+    height: 500px; /* Chiều cao vùng cuộn */
+    border-top: 1px solid var(--border-color);
+    margin-top: 10px;
+}
+
+.week-header {
+    display: grid;
+    grid-template-columns: 50px repeat(7, 1fr); /* 50px cho cột giờ, còn lại chia 7 */
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-light);
+    padding-right: 5px; /* Trừ hao thanh scroll */
+}
+
+.week-day-cell {
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-heading);
+    border-left: 1px solid #eee;
+}
+
+.week-day-cell.today {
+    color: var(--primary-color);
+    background-color: rgba(74, 144, 226, 0.1);
+}
+
+.week-body {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    position: relative;
+    padding-top: 15px;
+}
+
+.time-labels {
+    width: 50px;
+    flex-shrink: 0;
+    background: var(--bg-white);
+    border-right: 1px solid var(--border-color);
+    min-height: 780px;
+}
+
+.time-labels div {
+    height: 60px;/* QUY ƯỚC: 1 GIỜ = 60PX */
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+    transform: translateY(-5px);
+}
+
+.week-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    position: relative;
+    background-color: var(--bg-white);
+    background-size: 100% 60px; /* Dòng kẻ ngang mỗi 60px */
+    background-image: linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+    min-height: 780px;
+}
+
+.week-col {
+    position: relative;
+    border-left: 1px solid #f5f5f5;
+    height: 780px; /* 13 tiếng x 60px */
+}
+
+/* Khối Lịch (Event Block) */
+.event-block {
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 0.75rem;
+    color: var(--bg-white);
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-left: 3px solid rgba(0, 0, 0, 0.2);
+    z-index: 1;
+
+}
+
+.event-block:hover {
+    transform: scale(1.02);
+    z-index: 10;
+}
+
+.event-block strong {
+    display: block;
+    margin-bottom: 2px;
+}
+
+/* Màu sự kiện
+.event-block.lecture {
+    background-color: #4A90E2;
+}
+
+.event-block.lab {
+    background-color: #FF9800;
+}
+
+.event-block.tutorial {
+    background-color: #9C27B0;
+}
+
+.event-block.exam {
+    background-color: #F44336;
+} */
+
+/* --- [MỚI] Expand Mode (Chế độ mở rộng cho Week View) --- */
+.main-container.expand-view {
+    justify-content: flex-start;
+    /* Căn trái thay vì căn giữa */
+}
+
+.main-container.expand-view .left-column {
+    max-width: 100%; /* Gỡ bỏ giới hạn 380px */
+    flex: 1; /* Tự động chiếm hết khoảng trống còn lại */
+}
+
+.main-container.expand-view .calendar {
+    max-width: 100%; /* Lịch cũng bung ra theo cột trái */
+}
+
+/* Tùy chỉnh hiển thị trên màn hình lớn */
+@media (min-width: 1200px) {
+
+    /* Khi màn hình đủ rộng, Lịch Tuần sẽ nằm bên trái, Chi tiết nằm bên phải */
+    .main-container.expand-view .left-column {
+        /* Đảm bảo nó không bị bé lại quá mức nếu Chi tiết quá to */
+        min-width: 600px;
+    }
+}
+
+/* --- [MỚI] Full Week Mode --- */
+.main-container.full-week-mode {
+    display: block; /* Chuyển từ flex sang block để width 100% hoạt động mượt hơn */
+    width: 100%;
+    padding: 0 30px; /* Padding trùng với thanh controls */
+}
+
+.main-container.full-week-mode .calendar {
+    max-width: 100% !important; 
+    width: 100% !important;
+    min-height: 800px; 
+}
+
+.main-container.full-week-mode .schedule-detail {
+    display: none !important; /* Ẩn cột chi tiết */
+}
+
+.main-container.full-week-mode .left-column,
+.main-container.full-week-mode .calendar {
+    max-width: 100% !important; /* Bung lụa toàn màn hình */
+    flex: 1;
+}
+
+/* --- Style Nút điều hướng trong ô đầu tiên --- */
+.week-nav-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 100%;
+}
+.mini-nav-btn {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+.mini-nav-btn:hover {
+    background: #eee;
+    color: var(--primary-color);
+}
+
+/* --- Style Event Block (Màu trắng, nội dung chi tiết) --- */
+.event-block {
+    background-color: #ffffff !important; /* Luôn màu trắng */
+    border: 1px solid #ddd;
+    border-left: 4px solid var(--primary-color); /* Giữ lại viền trái để phân biệt */
+    color: var(--text-heading);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.event-block strong {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+}
+
+.event-block span {
+    font-size: 0.75rem;
+    color: var(--text-body);
+}
+
+.event-block i {
+    font-size: 0.7rem;
+    margin-right: 4px;
+    color: var(--text-muted);
+    width: 12px;
+    text-align: center;
+}
+
+/* --- Xử lý Trùng Lịch (Conflict) --- */
+.event-block.conflict {
+    background-color: #ffebee !important; /* Nền đỏ nhạt */
+    border-color: #ef9a9a;
+    border-left-color: #f44336; /* Viền đỏ đậm */
+}
+.event-block.conflict strong {
+    color: #d32f2f;
+}
+/* --- Timetable Toolbar (Nằm ngoài Main Container) --- */
+/* .timetable-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px; 
+    background: var(--bg-white);
+    margin-bottom: 20px; 
+    border-bottom: 1px solid var(--border-color);
+    position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+} */
+.timetable-controls {
+    display: flex;
+    justify-content: center; /* Luôn căn giữa nội dung bên trong */
+    padding: 15px 0; /* Bỏ padding trái phải, để wrapper tự lo */
+    background: var(--bg-white);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    width: 100%;
+}
+
+/* --- [MỚI] Wrapper chịu trách nhiệm co giãn --- */
+.controls-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    
+    /* Mặc định (Month View): Rộng bằng Calendar + Detail + Gap */
+    max-width: 1010px; 
+    padding: 0 15px; /* Padding nhẹ để không sát mép màn hình mobile */
+}
+
+/* Khi ở chế độ Week (được JS thêm class này vào) */
+.timetable-controls.full-width .controls-wrapper {
+    max-width: 100%; /* Bung lụa 100% */
+    padding: 0 30px;
+}
+.controls-left, .controls-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Style chung cho nút trên Toolbar */
+.control-btn {
+    height: 38px;
+    padding: 0 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    background: var(--bg-white);
+    color: var(--text-heading);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-btn:hover {
+    background: var(--bg-light);
+    border-color: #ccc;
+    color: var(--primary-color);
+}
+
+/* Nút Add nổi bật */
+.control-btn.add-btn {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 5px rgba(74, 144, 226, 0.3);
+}
+.control-btn.add-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+/* Update lại View Switcher cho khớp style mới */
+.view-switcher {
+    background: var(--bg-darker); /* Nền tối hơn chút */
+    padding: 4px;
+    border-radius: 8px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+}
+.view-btn {
+    padding: 4px 12px;
+    height: 100%;
+    font-size: 0.85rem;
+}

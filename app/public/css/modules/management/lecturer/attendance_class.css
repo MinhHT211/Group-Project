@@ -1,0 +1,223 @@
+/* public/css/modules/management/lecturer/attendance_class.css */
+
+/* --- 1. Variables --- */
+:root {
+    --primary-color: #3B82F6;
+    --primary-light: #eff6ff; /* blue-50 */
+    --text-main: #1e293b; /* slate-900 */
+    --text-secondary: #64748B; /* slate-500 */
+    --border-color: #E2E8F0;
+    --bg-card: #FFFFFF;
+    --bg-hover: #f8fafc;
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+[data-theme="dark"] {
+    --text-main: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --bg-card: #1e293b;
+    --bg-hover: #334155;
+}
+
+.attendance-page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* --- 2. Header --- */
+.page-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.page-title h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.highlight-date {
+    color: var(--primary-color);
+}
+
+.date-input {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    color: var(--text-main);
+    background-color: var(--bg-card);
+    font-size: 0.875rem;
+}
+
+/* --- 3. Alerts --- */
+.alert-error {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+}
+.alert-icon { color: #f87171; }
+.alert-content h3 { color: #991b1b; font-size: 0.875rem; font-weight: 600; margin: 0; }
+.alert-content p { color: #b91c1c; font-size: 0.875rem; margin: 0.25rem 0 0; }
+
+/* --- 4. Grid Layout (Quan trọng nhất để thay thế Tailwind Grid) --- */
+.classes-grid {
+    display: grid;
+    /* Tự động chia cột: tối thiểu 300px, tối đa 1fr */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+/* --- 5. Class Card --- */
+.class-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+}
+
+.class-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: var(--primary-color);
+}
+
+.card-body {
+    padding: 1.5rem;
+    flex: 1;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.class-code-badge {
+    background-color: var(--primary-light);
+    color: #1d4ed8; /* blue-700 */
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+}
+
+.student-count {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    gap: 0.25rem;
+}
+
+.course-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin: 0 0 1.5rem 0;
+    line-height: 1.4;
+    
+}
+
+.class-card:hover .course-name {
+    color: var(--primary-color);
+}
+
+.card-info {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    gap: 0.5rem;
+}
+
+.info-text {
+    font-weight: 500;
+}
+
+/* Card Footer */
+.card-footer {
+    background-color: var(--bg-hover);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-top: 1px solid var(--border-color);
+}
+
+.icon-arrow {
+    font-size: 1rem;
+    transition: transform 0.2s;
+}
+
+.class-card:hover .icon-arrow {
+    transform: translateX(4px);
+}
+
+/* --- 6. Empty State --- */
+.empty-state {
+    grid-column: 1 / -1; /* Chiếm toàn bộ chiều ngang grid */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    border: 2px dashed var(--border-color);
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    opacity: 0.5;
+}
+
+.empty-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.empty-desc {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.icon-sm {
+    font-size: 18px;
+    vertical-align: middle;
+}

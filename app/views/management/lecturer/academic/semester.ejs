@@ -1,0 +1,66 @@
+<div class="main-content">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-wrapper">
+        <div class="breadcrumb-nav">
+            <span class="breadcrumb-item">
+                <i class="fa-solid fa-book"></i> Khóa học
+            </span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span class="breadcrumb-item active">Học kỳ</span>
+        </div>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-card">
+        <div class="filter-row">
+            <div class="filter-item flex-grow-1">
+                <label for="semesterSearch">Tìm kiếm</label>
+                <input type="text" id="semesterSearch" class="form-control" 
+                       placeholder="Mã học kỳ, tên, năm học...">
+            </div>
+            <div class="filter-item">
+                <label for="semesterStatusFilter">Trạng thái</label>
+                <select id="semesterStatusFilter" class="form-control">
+                    <option value="">Tất cả</option>
+                    <option value="true">Hoạt động</option>
+                    <option value="false">Ngừng</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>&nbsp;</label>
+                <button type="button" class="btn-search" id="searchSemesterBtn">
+                    <i class="fa-solid fa-search"></i> Tìm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="margin-bottom: 15px; color: #666; font-size: 14px;">
+        Tổng: <strong id="totalSemesters" style="color: #1565c0;">0</strong> học kỳ
+    </div>
+
+    <!-- Table -->
+    <div class="main-card">
+        <div class="table-responsive">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">STT</th>
+                        <th style="width: 200px;">Mã học kỳ</th>
+                        <th>Tên học kỳ</th>
+                        <th style="width: 150px;">Năm học</th>
+                        <th style="width: 130px;">Ngày đăng ký</th>
+                        <th style="width: 120px;">Trạng thái</th>
+                        <th style="width: 100px;" class="text-center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="semesterTableBody">
+                    <tr><td colspan="6" class="text-center"><i class="fa-solid fa-spinner fa-spin"></i> Đang tải...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-wrapper" id="pagination-semester"></div>
+    </div>
+</div>
+<script type="module" src="/js/modules/lecturer/academic/semesters.js"></script>

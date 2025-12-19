@@ -1,0 +1,156 @@
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --bg-light: #f8f9fa;
+    --bg-hover: #f8f9ff;
+    --text-muted: #666;
+    --border-color: #dee2e6;
+    
+    /* Grade Colors */
+    --color-success: #2e7d32;
+    --color-info: #1976d2;
+    --color-warning: #f57c00;
+    --color-danger: #c62828;
+}
+
+/* --- Layout & Card --- */
+.summary-card {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.2s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.summary-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: var(--primary-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.summary-content h6 {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.summary-value {
+    color: #333;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* --- Semester Accordion --- */
+.semester-group {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.semester-header {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 12px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.semester-header:hover { opacity: 0.95; }
+.semester-toggle { transition: transform 0.3s; }
+.semester-header.collapsed .semester-toggle { transform: rotate(-90deg); }
+
+.semester-body {
+    transition: max-height 0.4s ease;
+    max-height: 2000px;
+}
+.semester-body.collapsed { max-height: 0; overflow: hidden; }
+
+/* --- Table Styling (Full Width & Centered) --- */
+.grades-table {
+    width: 100%;
+    margin: 0;
+    table-layout: fixed; /* Chia cột theo % chính xác */
+    border-collapse: collapse;
+}
+
+.grades-table th, 
+.grades-table td {
+    padding: 12px 8px;
+    vertical-align: middle !important;
+    text-align: center !important; /* Căn giữa toàn bộ */
+    border-bottom: 1px solid var(--border-color);
+    word-wrap: break-word;
+}
+
+.grades-table thead { background: var(--bg-light); }
+.grades-table th {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #555;
+    font-weight: 600;
+}
+.grades-table tbody tr:hover { background: var(--bg-hover); }
+
+/* --- Utilities & Badges --- */
+.enrollment-badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.badge-normal { background: #e3f2fd; color: var(--color-info); }
+.badge-retake { background: #fff3e0; color: var(--color-warning); }
+.badge-improve { background: #f3e5f5; color: #7b1fa2; }
+
+/* Grade Colors */
+.grade-A, .grade-A-plus { color: var(--color-success); font-weight: 700; }
+.grade-B, .grade-B-plus { color: var(--color-info); font-weight: 700; }
+.grade-C, .grade-C-plus { color: var(--color-warning); font-weight: 700; }
+.grade-D, .grade-D-plus, .grade-F { color: var(--color-danger); font-weight: 700; }
+
+/* Progress Bar */
+.attendance-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+.progress-bar-custom {
+    flex: 1;
+    max-width: 60px;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.progress-fill { height: 100%; border-radius: 4px; }
+.progress-fill.high { background: var(--color-success); }
+.progress-fill.medium { background: var(--color-warning); }
+.progress-fill.low { background: var(--color-danger); }
+.attendance-text { font-size: 11px; color: var(--text-muted); min-width: 35px; text-align: right; }
+
+/* Empty State */
+.empty-state { padding: 40px; text-align: center; color: #aaa; }
+.empty-state i { font-size: 48px; margin-bottom: 15px; display: block; }

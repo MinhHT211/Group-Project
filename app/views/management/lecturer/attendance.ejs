@@ -1,0 +1,148 @@
+<div class="attendance-page-container">
+    
+    <div class="attendance-header">
+        <div class="header-left">
+            <div class="title-group">
+                <a href="/lecturer/attendance" class="btn-back" title="Quay lại">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </a>
+                <h1 class="page-title">
+                    <%= (typeof classInfo !== 'undefined' && classInfo) ? (classInfo.name || classInfo.class_name) : 'Lớp không xác định' %>
+                </h1>
+            </div>
+            <div class="sub-info">
+                <% 
+                    const now = new Date();
+                    const dateStr = now.toLocaleDateString('vi-VN');
+                %>
+                <span class="info-item">
+                    <span class="material-symbols-outlined icon-sm">calendar_clock</span>
+                    Hôm nay: <%= dateStr %>
+                </span>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <div class="toolbar-card">
+                <div class="session-control">
+                    <label for="sessionSelect" class="label-text">Buổi học:</label>
+                    <select id="sessionSelect" class="form-select">
+                        <option value="">-- Buổi mới --</option>
+                        <% if (typeof sessionOptions !== 'undefined' && Array.isArray(sessionOptions)) { %>
+                            <% sessionOptions.forEach(function(s) { %>
+                                <option value="<%= s %>" <%= (typeof sessionNumber !== 'undefined' && String(sessionNumber) === String(s)) ? 'selected' : '' %>>
+                                    Buổi <%= s %>
+                                </option>
+                            <% }) %>
+                        <% } %>
+                    </select>
+                </div>
+                
+                <button type="button" id="saveAttendanceBtn" class="btn-primary">
+                    <span class="material-symbols-outlined icon-btn">save</span>
+                    Lưu điểm danh
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="attendance-content-card">
+        <div class="table-responsive table-container">
+            <form id="attendance-form">
+                <table class="attendance-table">
+                    <thead>
+                        <tr>
+                            <th class="col-stt">STT</th>
+                            <th class="col-student">Sinh viên</th>
+                            <th class="col-code">MSSV</th>
+                            <th class="col-status">Trạng thái</th>
+                            <th class="col-note">Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% 
+                            let studentsList = (typeof students !== 'undefined' && Array.isArray(students)) ? students : [];
+                        %>
+
+                        <% if (studentsList.length === 0) { %>
+                            <tr>
+                                <td colspan="5" class="empty-row">
+                                    <div class="empty-state">
+                                        <span class="material-symbols-outlined empty-icon">person_off</span>
+                                        <p>Chưa có sinh viên nào trong danh sách lớp.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% } else { %>
+                            <% studentsList.forEach(function(enrollment, idx) { 
+                                const student = enrollment.student || {};
+                                const user = student.user || {};
+                                const fullName = ((user.first_name || '') + ' ' + (user.last_name || '')).trim() || 'N/A';
+                                const studentCode = student.student_code || 'N/A';
+
+                                // Logic tìm record cũ
+                                const recs = enrollment.attendance_all || enrollment.attendance_records || [];
+                                let matched = null;
+                                const requestedSession = (typeof sessionNumber !== 'undefined' && sessionNumber) ? String(sessionNumber) : null;
+                                
+                                if (requestedSession) {
+                                    matched = recs.find(a => {
+                                        if(!a) return false;
+                                        const aSess = a.session_number != null ? String(a.session_number) : null;
+                                        return aSess === requestedSession;
+                                    });
+                                }
+                            %>
+                            <tr class="student-row">
+                                <td class="col-stt text-center"><%= idx + 1 %></td>
+                                <td class="col-student">
+                                    <div class="student-name"><%= fullName %></div>
+                                    <div class="student-code-mobile"><%= studentCode %></div>
+                                </td>
+                                <td class="col-code"><%= studentCode %></td>
+                                <td class="col-status">
+                                    <select class="status-select form-select" 
+                                            data-student-id="<%= enrollment.student_id %>"
+                                            data-enrollment-id="<%= enrollment.enrollment_id %>"
+                                            data-attendance-id="<%= matched ? matched.attendance_id : '' %>"
+                                            data-session-number="<%= matched ? matched.session_number : matched ? matched.session_number : '' %>">
+                                        <option value="present" <%= (!matched || matched.status === 'present') ? 'selected' : '' %>>Có mặt</option>
+                                        <option value="absent" <%= (matched && matched.status === 'absent') ? 'selected' : '' %>>Vắng mặt</option>
+                                        <option value="late" <%= (matched && matched.status === 'late') ? 'selected' : '' %>>Đi trễ</option>
+                                        <option value="excused" <%= (matched && matched.status === 'excused') ? 'selected' : '' %>>Có phép</option>
+                                    </select>
+                                </td>
+                                <td class="col-note">
+                                    <input type="text" 
+                                           class="note-input form-input"
+                                           placeholder="Ghi chú..."
+                                           value="<%= matched ? (matched.notes || '') : '' %>">
+                                </td>
+                            </tr>
+                            <% }) %>
+                        <% } %>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        
+        <div class="attendance-footer">
+            <span>Tổng số: <strong><%= studentsList.length %></strong> sinh viên</span>
+            <span id="unsaved-changes-indicator" class="unsaved-warning" style="display: none;">
+                <span class="material-symbols-outlined icon-sm">warning</span> Có thay đổi chưa lưu
+            </span>
+        </div>
+    </div>
+</div>
+
+<script id="attendance-config" type="application/json">
+<%- JSON.stringify({
+    classId: (typeof classId !== 'undefined' ? classId : (typeof classInfo !== 'undefined' ? (classInfo.class_id || classInfo.id) : '')),
+    scheduleId: (typeof scheduleId !== 'undefined' ? scheduleId : ''),
+    sessionNumber: (typeof sessionNumber !== 'undefined' ? sessionNumber : ''),
+    currentUserId: (typeof currentUserId !== 'undefined' && currentUserId !== null ? String(currentUserId) : ''),
+    apiBaseUrl: '/classes'
+}) %>
+</script>
+
+<script src="/js/modules/lecturer/attendanceDev.js"></script>

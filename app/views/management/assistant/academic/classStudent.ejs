@@ -1,0 +1,215 @@
+<div class="main-content">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-wrapper">
+        <div class="breadcrumb-nav">
+            <span class="breadcrumb-item">
+                <i class="fa-solid fa-book"></i> Khóa học
+            </span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span class="breadcrumb-item">
+                <i class="fa-solid fa-calendar-alt"></i> Học kỳ
+            </span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span class="breadcrumb-item">
+                <i class="fa-solid fa-chalkboard"></i> Lớp học
+            </span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span class="breadcrumb-item active" id="currentClassBreadcrumb">Học sinh</span>
+        </div>
+    </div>
+
+    <!-- Class Info Card -->
+    <div class="filter-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.3rem;">
+                    <i class="fa-solid fa-chalkboard"></i> <span id="classInfoName">...</span>
+                </h3>
+                <div style="display: flex; gap: 20px; font-size: 0.95rem;">
+                    <span><i class="fa-solid fa-book"></i> <span id="classInfoCourse">...</span></span>
+                    <span><i class="fa-solid fa-calendar-alt"></i> <span id="classInfoSemester">...</span></span>
+                    <span><i class="fa-solid fa-chalkboard-user"></i> <span id="classInfoLecturer">...</span></span>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 2rem; font-weight: bold;">
+                    <span id="currentEnrollment">0</span>/<span id="maxCapacity">0</span>
+                </div>
+                <div style="font-size: 0.85rem; opacity: 0.9;">Sĩ số</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header-block">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <h2 class="page-title" style="margin: 0;">Học sinh</h2>
+        </div>
+        <button type="button" class="btn-primary-add" id="addStudentsBtn">
+            <i class="fa-solid fa-user-plus"></i> Thêm học sinh
+        </button>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-card">
+        <div class="filter-row">
+            <div class="filter-item flex-grow-1">
+                <label for="studentSearch">Tìm kiếm</label>
+                <input type="text" id="studentSearch" class="form-control" 
+                       placeholder="Mã sinh viên, tên...">
+            </div>
+            <div class="filter-item">
+                <label for="enrollmentTypeFilter">Loại đăng ký</label>
+                <select id="enrollmentTypeFilter" class="form-control">
+                    <option value="">Tất cả</option>
+                    <option value="regular">Thông thường</option>
+                    <option value="retake">Học lại</option>
+                    <option value="improve">Cải thiện điểm</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="enrollmentStatusFilter">Trạng thái</label>
+                <select id="enrollmentStatusFilter" class="form-control">
+                    <option value="">Tất cả</option>
+                    <option value="enrolled">Đang học</option>
+                    <option value="dropped">Đã rút</option>
+                    <option value="completed">Hoàn thành</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>&nbsp;</label>
+                <button type="button" class="btn-search" id="searchStudentBtn">
+                    <i class="fa-solid fa-search"></i> Tìm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="main-card">
+        <div class="table-responsive">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th style="width: 70px;">STT</th>
+                        <th style="width: 120px;">MSSV</th>
+                        <th>Họ và tên</th>
+                        <th style="width: 350px;">Email</th>
+                        <th style="width: 200px;">Chuyên ngành</th>
+                        <th style="width: 150px;" class="text-center">Năm nhập học</th>
+                        <th style="width: 120px;">Loại đăng ký</th>
+                        <th style="width: 120px;">Trạng thái</th>
+                        <th style="width: 150px;">Ngày đăng ký</th>
+                        <th style="width: 120px;" class="text-center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="studentsTableBody">
+                    <tr><td colspan="9" class="text-center"><i class="fa-solid fa-spinner fa-spin"></i> Đang tải...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ADD STUDENTS MODAL -->
+    <div class="modal-overlay" id="addStudentsModal">
+        <div class="modal-content" style="max-width: 800px;">
+            <button type="button" class="close-modal-btn" data-modal="addStudents">&times;</button>
+            <h2 class="modal-title">Thêm học sinh vào lớp</h2>
+            
+            <form id="addStudentsForm">
+                <div class="filter-row" style="margin-bottom: 15px;">
+                    <div class="filter-item flex-grow-1">
+                        <label for="availableStudentSearch">Tìm kiếm</label>
+                        <input type="text" id="availableStudentSearch" class="form-control" 
+                               placeholder="Mã sinh viên, tên...">
+                    </div>
+                    <div class="filter-item">
+                        <label for="majorFilter">Chuyên ngành</label>
+                        <select id="majorFilter" class="form-control">
+                            <option value="">Tất cả</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="admissionYearFilter">Năm nhập học</label>
+                        <select id="admissionYearFilter" class="form-control">
+                            <option value="">Tất cả</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label>&nbsp;</label>
+                        <button type="button" class="btn-search" id="searchAvailableStudentsBtn">
+                            <i class="fa-solid fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Loại đăng ký</label>
+                    <select id="enrollmentTypeSelect" class="form-control">
+                        <option value="regular">Thông thường</option>
+                        <option value="retake">Học lại</option>
+                        <option value="improve">Cải thiện điểm</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 10px; padding: 10px; background: #f8f9fa; border-radius: 6px;">
+                    <label style="display: flex; align-items: center; gap: 10px; margin: 0; cursor: pointer;">
+                        <input type="checkbox" id="selectAllStudents" style="width: 18px; height: 18px;">
+                        <span style="font-weight: 600;">Chọn tất cả (<span id="availableCount">0</span> sinh viên)</span>
+                    </label>
+                </div>
+
+                <div class="available-students-list" id="availableStudentsList">
+                    <div class="empty-message">Đang tải...</div>
+                </div>
+
+                <div style="margin-top: 15px; padding: 10px; background: #e3f2fd; border-radius: 6px; text-align: center;">
+                    <strong>Đã chọn: <span id="selectedCount">0</span> sinh viên</strong>
+                </div>
+
+                <div class="modal-actions-footer">
+                    <button type="button" class="btn-cancel" data-modal="addStudents">Hủy</button>
+                    <button type="submit" class="btn-save">
+                        <i class="fa-solid fa-user-plus"></i> Thêm <span id="selectedCountBtn">0</span> sinh viên
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- UPDATE ENROLLMENT MODAL - CẬP NHẬT CẢ TYPE VÀ STATUS -->
+    <div class="modal-overlay" id="updateEnrollmentModal">
+        <div class="modal-content modal-small">
+            <button type="button" class="close-modal-btn" data-modal="updateEnrollment">&times;</button>
+            <h2 class="modal-title">Cập nhật thông tin</h2>
+            
+            <form id="updateEnrollmentForm">
+                <div class="form-group">
+                    <label for="updateEnrollmentType">Loại đăng ký <span class="text-red">*</span></label>
+                    <select id="updateEnrollmentType" class="form-control" required>
+                        <option value="regular">Thông thường</option>
+                        <option value="retake">Học lại</option>
+                        <option value="improve">Cải thiện điểm</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="updateEnrollmentStatus">Trạng thái <span class="text-red">*</span></label>
+                    <select id="updateEnrollmentStatus" class="form-control" required>
+                        <option value="enrolled">Đang học</option>
+                        <option value="dropped">Đã rút</option>
+                        <option value="completed">Hoàn thành</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions-footer">
+                    <button type="button" class="btn-cancel" data-modal="updateEnrollment">Hủy</button>
+                    <button type="submit" class="btn-save">
+                        <i class="fa-solid fa-save"></i> Lưu thay đổi
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="module" src="/js/modules/assistant/academic/classStudent.js"></script>

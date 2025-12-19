@@ -1,0 +1,222 @@
+/* ===== Grade Management Page Styles ===== */
+
+/* Page Title */
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.breadcrumb {
+  font-size: 0.875rem;
+}
+
+.breadcrumb-item a {
+  color: #6c757d;
+  text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+/* Action Bar */
+.action-bar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.upload-form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.upload-form input[type="file"] {
+  max-width: 250px;
+}
+
+/* Grade Table */
+.grade-table {
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.grade-table th,
+.grade-table td {
+  padding: 0.75rem 0.5rem;
+  vertical-align: middle;
+}
+
+.grade-table thead th {
+  font-weight: 600;
+  color: #495057;
+  background-color: #f8f9fa;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Editable Cells */
+.editable {
+  cursor: pointer;
+  background-color: #fff;
+  transition: background-color 0.2s ease;
+  position: relative;
+  min-height: 30px;
+}
+
+.editable:hover {
+  background-color: #e3f2fd;
+  outline: 2px solid #90caf9;
+}
+
+.editable::after {
+  content: "✎";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  font-size: 12px;
+  color: #666;
+  transition: opacity 0.2s;
+}
+
+.editable:hover::after {
+  opacity: 0.5;
+}
+
+.editable.edited {
+  background-color: #fff3cd;
+}
+
+.editable input,
+.editable textarea {
+  width: 100%;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  padding: 0.375rem;
+  font-size: 0.9rem;
+}
+
+.editable textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+/* Readonly Cells */
+.readonly {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
+  font-weight: 500;
+}
+
+/* Bulk Actions */
+.bulk-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+/* Weight Table in Modal */
+.weight-table {
+  margin-bottom: 0;
+}
+
+.weight-input {
+  text-align: center;
+  max-width: 100px;
+  margin: 0 auto;
+}
+
+#totalWeight {
+  font-size: 1.1rem;
+  color: #007bff;
+}
+
+/* Alert Styles */
+.alert {
+  border-left: 4px solid;
+}
+
+.alert-success {
+  border-left-color: #28a745;
+}
+
+.alert-danger {
+  border-left-color: #dc3545;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .grade-table {
+    font-size: 0.85rem;
+  }
+
+  .grade-table th,
+  .grade-table td {
+    padding: 0.5rem 0.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .action-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .upload-form {
+    flex-direction: column;
+  }
+
+  .upload-form input[type="file"] {
+    max-width: 100%;
+  }
+
+  .bulk-actions {
+    flex-direction: column;
+  }
+
+  .modal-dialog {
+    margin: 1rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .action-bar,
+  .bulk-actions,
+  .btn,
+  .breadcrumb {
+    display: none !important;
+  }
+
+  .grade-table {
+    font-size: 10pt;
+  }
+
+  .editable {
+    cursor: default;
+  }
+}

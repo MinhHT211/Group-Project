@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= typeof title !== 'undefined' ? title : 'USTH Management Portal' %>
+    </title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+    <link rel="stylesheet" href="/css/base/reset.css">
+    <link rel="stylesheet" href="/css/base/variable.css">
+
+    <link rel="stylesheet" href="/css/components/button.css">
+    <link rel="stylesheet" href="/css/components/input.css">
+    <link rel="stylesheet" href="/css/components/logo.css">
+    <link rel="stylesheet" href="/css/components/toast.css">
+    <link rel="stylesheet" href="/css/layouts/base.css">
+    <link rel="stylesheet" href="/css/components/confirm-modal.css">
+
+    <% if (locals.role) { %>
+        <link rel="stylesheet" href="/css/modules/management/common/_base.css">
+        <link rel="stylesheet" href="/css/modules/management/common/_header.css">
+        <link rel="stylesheet" href="/css/modules/management/common/_sidebar.css">
+        <link rel="stylesheet" href="/css/modules/management/common/_footer.css">
+        <link rel="stylesheet" href="/css/modules/management/common/_home-page.css">
+        <link rel="stylesheet" href="/css/modules/management/common/_page-controls.css">
+        <link rel="stylesheet" href="/css/modules/management/common/_responsive.css">
+        
+        <!-- Additional CSS -->
+        <% if (locals.additionalCSS) { %>
+            <% additionalCSS.forEach(css => { %>
+                <link rel="stylesheet" href="<%= css %>">
+            <% }); %>
+        <% } %>
+    <% } %>
+
+    <% if(typeof pageCSS !== 'undefined' && pageCSS){ %>
+        <link rel="stylesheet" href="<%= pageCSS %>">
+    <% } %>
+</head>
+
+<body>
+    <div id="toast-container"></div>
+    <%- include('../partials/sidebar', { navItems: locals.navItems || [] }) %>
+
+    <main class="main-content">
+        <%- include('../partials/header', { user: locals.user || {} }) %>
+        
+        <div class="page-container">
+            <%- body %>
+        </div>
+
+        <%- include('../partials/footer') %>
+    </main>
+    
+    <script src="/js/components/fa-eye.js"></script>
+    <script type="module" src="/js/components/logout.js"></script>
+    
+    <% if (locals.role) { %>
+        <script src="/js/components/role_layouts.js"></script>
+        
+        <% } %>
+
+    <% if (locals.additionalJS) { %>
+        <% additionalJS.forEach(js => { %>
+            <script src="<%= js %>"></script>
+        <% }); %>
+    <% } %>
+
+    <% if(typeof pageJS !== 'undefined' && pageJS){ %>
+      <script src="<%- pageJS %>"></script>
+    <% } %>
+
+    <%- include('../partials/toast_container') %>
+    <%- include('../partials/confirm_modal') %>
+</body>
+
+</html>

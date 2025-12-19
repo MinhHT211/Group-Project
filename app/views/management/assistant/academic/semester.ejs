@@ -1,0 +1,111 @@
+<div class="main-content">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-wrapper">
+        <div class="breadcrumb-nav">
+            <span class="breadcrumb-item">
+                <i class="fa-solid fa-book"></i> Khóa học
+            </span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span class="breadcrumb-item active">Học kỳ</span>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header-block">
+        <h2 class="page-title" style="margin: 0;">Học kỳ</h2>
+        <button type="button" class="btn-primary-add" id="addSemesterBtn">
+            <i class="fa-solid fa-plus"></i> Thêm học kỳ
+        </button>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-card">
+        <div class="filter-row">
+            <div class="filter-item flex-grow-1">
+                <label for="semesterSearch">Tìm kiếm</label>
+                <input type="text" id="semesterSearch" class="form-control" 
+                       placeholder="Mã học kỳ, tên, năm học...">
+            </div>
+            <div class="filter-item">
+                <label for="semesterStatusFilter">Trạng thái</label>
+                <select id="semesterStatusFilter" class="form-control">
+                    <option value="">Tất cả</option>
+                    <option value="true">Hoạt động</option>
+                    <option value="false">Ngừng</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>&nbsp;</label>
+                <button type="button" class="btn-search" id="searchSemesterBtn">
+                    <i class="fa-solid fa-search"></i> Tìm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="margin-bottom: 15px; color: #666; font-size: 14px;">
+        Tổng: <strong id="totalSemesters" style="color: #1565c0;">0</strong> học kỳ
+    </div>
+
+    <!-- Table -->
+    <div class="main-card">
+        <div class="table-responsive">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th style="width: 70px;">STT</th>
+                        <th style="width: 200px;">Mã học kỳ</th>
+                        <th>Tên học kỳ</th>
+                        <th style="width: 150px;">Năm học</th>
+                        <th style="width: 130px;">Ngày đăng ký</th>
+                        <th style="width: 120px;">Trạng thái</th>
+                        <th style="width: 150px;" class="text-center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="semesterTableBody">
+                    <tr><td colspan="6" class="text-center"><i class="fa-solid fa-spinner fa-spin"></i> Đang tải...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-wrapper" id="pagination-semester"></div>
+    </div>
+
+    <!-- SEMESTER MODAL -->
+    <div class="modal-overlay" id="semesterModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <button type="button" class="close-modal-btn" data-modal="semester">&times;</button>
+            <h2 class="modal-title" id="semesterModalTitle">Thêm học kỳ</h2>
+            <form id="semesterForm">
+                <div class="form-group">
+                    <label>Mã học kỳ <span class="text-red">*</span></label>
+                    <input type="text" name="semester_code" id="semester_code" class="form-control" required placeholder="VD: HK1_2024">
+                </div>
+                <div class="form-group">
+                    <label>Tên học kỳ <span class="text-red">*</span></label>
+                    <input type="text" name="semester_name" id="semester_name" class="form-control" required placeholder="VD: Học kỳ 1 Năm học 2024-2025">
+                </div>
+                <div class="form-group">
+                    <label>Năm học <span class="text-red">*</span></label>
+                    <input type="text" name="academic_year" id="academic_year" class="form-control" required placeholder="VD: 2024-2025">
+                </div>
+                <div class="form-group">
+                    <label>Ngày bắt đầu đăng ký <span class="text-red">*</span></label>
+                    <input type="date" name="enrollment_date" id="enrollment_date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Trạng thái</label>
+                    <select name="is_active" id="semester_is_active" class="form-control">
+                        <option value="true">Hoạt động</option>
+                        <option value="false">Ngừng hoạt động</option>
+                    </select>
+                </div>
+                <div class="modal-actions-footer">
+                    <button type="button" class="btn-cancel" data-modal="semester">Hủy</button>
+                    <button type="submit" class="btn-save"><i class="fa-solid fa-save"></i> Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="module" src="/js/modules/assistant/academic/semester.js"></script>

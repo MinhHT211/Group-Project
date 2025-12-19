@@ -1,0 +1,287 @@
+<div id="timetable-content" class="page-content active">
+    <div class="timetable-controls">
+        <div class="controls-wrapper">
+    
+            <div class="controls-left">
+                <button id="todayBtn" class="control-btn">Today</button>
+                <div class="view-switcher">
+                    <button id="viewMonthBtn" class="view-btn active">Month</button>
+                    <button id="viewWeekBtn" class="view-btn">Week</button>
+                </div>
+            </div>
+    
+            <div class="controls-right">
+                <button id="refreshScheduleBtn" class="control-btn refresh-btn">
+                    <i class="fa-solid fa-arrows-rotate"></i> Refresh
+                </button>
+            </div>
+    
+        </div>
+    </div>
+    <div class="main-container">
+        <!-- calendar -->
+        <div class="calendar">
+            <div class="header">
+                <div class="nav-group">
+                    <button id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="monthYear clickable" id="monthYear"></div>
+                    <button id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <div class="filter-toolbar">
+                <div class="filter-group">
+                    <i class="fa-solid fa-book filter-icon"></i>
+                    <select id="courseFilterSelect" class="filter-select">
+                        <option value="">All Courses</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down custom-arrow"></i>
+                </div>
+            
+                <div class="filter-group">
+                    <i class="fa-solid fa-filter filter-icon"></i>
+                    <select id="classFilterSelect" class="filter-select">
+                        <option value="">All Classes</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down custom-arrow"></i>
+                </div>
+            </div>
+        
+            <div id="monthViewContainer">
+                <div class="days">
+                    <div class="day">Mon</div>
+                    <div class="day">Tue</div>
+                    <div class="day">Wed</div>
+                    <div class="day">Thu</div>
+                    <div class="day">Fri</div>
+                    <div class="day">Sat</div>
+                    <div class="day">Sun</div>
+                </div>
+                <div class="dates" id="dates"></div>
+            </div>
+
+            <div id="weekViewContainer" class="week-view" style="display: none;">
+                <div class="week-header" id="weekHeader"></div>
+            
+                <div class="week-body">
+                    <div class="time-labels">
+                        <div>05:00</div>
+                        <div>06:00</div>
+                        <div>07:00</div>
+                        <div>08:00</div>
+                        <div>09:00</div>
+                        <div>10:00</div>
+                        <div>11:00</div>
+                        <div>12:00</div>
+                        <div>13:00</div>
+                        <div>14:00</div>
+                        <div>15:00</div>
+                        <div>16:00</div>
+                        <div>17:00</div>
+                        <div>18:00</div>
+                    </div>
+                    <div class="week-grid" id="weekGrid"></div>
+                </div>
+            </div>
+
+            <div id="monthPicker" class="month-picker">
+                <div class="picker-header">
+                    <button id="pickerPrevYear"><i class="fa-solid fa-chevron-left"></i></button>
+                    <span id="pickerYearDisplay">2025</span>
+                    <button id="pickerNextYear"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="months-grid">
+                    <div class="month-item" data-month="0">Jan</div>
+                    <div class="month-item" data-month="1">Feb</div>
+                    <div class="month-item" data-month="2">Mar</div>
+                    <div class="month-item" data-month="3">Apr</div>
+                    <div class="month-item" data-month="4">May</div>
+                    <div class="month-item" data-month="5">Jun</div>
+                    <div class="month-item" data-month="6">Jul</div>
+                    <div class="month-item" data-month="7">Aug</div>
+                    <div class="month-item" data-month="8">Sep</div>
+                    <div class="month-item" data-month="9">Oct</div>
+                    <div class="month-item" data-month="10">Nov</div>
+                    <div class="month-item" data-month="11">Dec</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- detail -->
+        <div class="schedule-detail">
+            <div class="detail-header">
+                <h3 id="selectedDate">Today</h3>
+                <div class="detail-actions">
+                    <button id="addScheduleBtn" class="add-btn">
+                        <i class="fa-solid fa-plus"></i> Add
+                    </button>
+                </div>
+            </div>
+            <div class="schedule-list" id="scheduleList">
+                <div class="no-schedule">
+                    <i class="fa-regular fa-calendar"></i>
+                    <p>No schedule</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Choice Modal (for recurring schedules) -->
+    <div id="actionModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3 id="actionModalTitle">Choose Action</h3>
+                <button id="closeActionModal" class="close-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="actionModalMessage" style="margin-bottom: 20px; color: #666;"></p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button id="actionThisDay" class="btn-primary" style="width: 100%;">
+                        <i class="fa-solid fa-calendar-day"></i> This day only
+                    </button>
+                    <button id="actionAllDays" class="btn-secondary" style="width: 100%;">
+                        <i class="fa-solid fa-calendar-week"></i> All occurrences
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- schedule modal -->
+    <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add new schedule</h3>
+                <button id="closeModal" class="close-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="scheduleForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="classSelect">Class *</label>
+                        <select id="classSelect" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                            <option value="">-- Select a class --</option>
+                        </select>
+                        <small class="form-hint">Select the class from the database list.</small>
+                    </div>                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="scheduleRoom">Room *</label>
+                            <input type="text" id="scheduleRoom" placeholder="A1-201" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduleBuilding">Building *</label>
+                            <input type="text" id="scheduleBuilding" placeholder="Building A1">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="scheduleCampus">Campus</label>
+                            <input type="text" id="scheduleCampus" placeholder="Main campus">
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduleType">Schedule type *</label>
+                            <select id="scheduleType">
+                                <option value="lecture">Lecture</option>
+                                <option value="lab">Lab</option>
+                                <option value="tutorial">Tutorial</option>
+                                <option value="exam">Exam</option>
+                                <option value="review">Review</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lecturerSelect">Instructor</label>
+                        <select id="lecturerSelect" style="width: 100%;">
+                            <option value="">-- Default (Class Lecturer) --</option>
+                        </select>
+                        <small class="form-hint" id="lecturerHint">
+                            "Lecture" defaults to the main lecturer. Change type to "Tutorial/Lab" to assign others.
+                        </small>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="scheduleStartTime">Start time *</label>
+                            <input type="time" id="scheduleStartTime" required step="300">
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduleEndTime">End time *</label>
+                            <input type="time" id="scheduleEndTime" required step="300">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="isRecurring" checked>
+                            <span>Repeat weekly</span>
+                        </label>
+                        <small class="form-hint">Turn off to create a single-day schedule for the currently selected
+                            date.</small>
+                    </div>
+                    <div id="recurringOptions" class="recurring-options">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dayOfWeek">Day of week *</label>
+                                <select id="dayOfWeek">
+                                    <option value="1">Monday</option>
+                                    <option value="2">Tuesday</option>
+                                    <option value="3">Wednesday</option>
+                                    <option value="4">Thursday</option>
+                                    <option value="5">Friday</option>
+                                    <option value="6">Saturday</option>
+                                    <option value="7">Sunday</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="effectiveFrom">Effective from *</label>
+                                <input type="date" id="effectiveFrom">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="effectiveTo">Effective to</label>
+                                <input type="date" id="effectiveTo">
+                                <small class="form-hint">Leave blank to keep the schedule active until
+                                    cancelled.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="singleDateInfo" class="single-date-info" style="display: none;">
+                        <i class="fa-solid fa-info-circle"></i>
+                        <span>This schedule will only apply on <strong id="selectedDateText"></strong></span>
+                    </div>
+                    <div class="form-group" style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="isOnline">
+                            <span>Online meeting</span>
+                        </label>
+                        <small class="form-hint">Enable to add a meeting URL.</small>
+                    </div>
+                    <div class="form-group" id="onlineUrlGroup">
+                        <label for="onlineMeetingUrl">Online meeting URL *</label>
+                        <input type="url" id="onlineMeetingUrl" placeholder="https://meet.google.com/xxx-xxxx-xxx">
+                    </div>
+                    <div class="form-group">
+                        <label for="scheduleNotes">Notes</label>
+                        <textarea id="scheduleNotes" placeholder="Optional notes..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancelBtn" class="btn-secondary">Cancel</button>
+                    <button type="submit" id="saveBtn" class="btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Set role for JavaScript
+    window.USER_ROLE = 'assistant';
+    window.CURRENT_DATE_KEY = null;
+
+    var rawDeptId = "<%= (typeof userDeptId !== 'undefined' && userDeptId) ? userDeptId : '' %>";
+    window.MY_DEPT_ID = rawDeptId ? Number(rawDeptId) : null;
+</script>

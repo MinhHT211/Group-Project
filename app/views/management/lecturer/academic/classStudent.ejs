@@ -1,0 +1,104 @@
+<div class="main-content">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-wrapper">
+        <div class="breadcrumb-nav">
+            <span class="breadcrumb-item">
+                <i class="fa-solid fa-book"></i> Khóa học
+            </span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span class="breadcrumb-item">
+                <i class="fa-solid fa-calendar-alt"></i> Học kỳ
+            </span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span class="breadcrumb-item">
+                <i class="fa-solid fa-chalkboard"></i> Lớp học
+            </span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span class="breadcrumb-item active" id="currentClassBreadcrumb">Học sinh</span>
+        </div>
+    </div>
+
+    <!-- Class Info Card -->
+    <div class="filter-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.3rem;">
+                    <i class="fa-solid fa-chalkboard"></i> <span id="classInfoName">...</span>
+                </h3>
+                <div style="display: flex; gap: 20px; font-size: 0.95rem;">
+                    <span><i class="fa-solid fa-book"></i> <span id="classInfoCourse">...</span></span>
+                    <span><i class="fa-solid fa-calendar-alt"></i> <span id="classInfoSemester">...</span></span>
+                    <span><i class="fa-solid fa-chalkboard-user"></i> <span id="classInfoLecturer">...</span></span>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 2rem; font-weight: bold;">
+                    <span id="currentEnrollment">0</span>/<span id="maxCapacity">0</span>
+                </div>
+                <div style="font-size: 0.85rem; opacity: 0.9;">Sĩ số</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-card">
+        <div class="filter-row">
+            <div class="filter-item flex-grow-1">
+                <label for="studentSearch">Tìm kiếm</label>
+                <input type="text" id="studentSearch" class="form-control" 
+                       placeholder="Mã sinh viên, tên...">
+            </div>
+            <div class="filter-item">
+                <label for="enrollmentTypeFilter">Loại đăng ký</label>
+                <select id="enrollmentTypeFilter" class="form-control">
+                    <option value="">Tất cả</option>
+                    <option value="regular">Thông thường</option>
+                    <option value="retake">Học lại</option>
+                    <option value="improve">Cải thiện điểm</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="enrollmentStatusFilter">Trạng thái</label>
+                <select id="enrollmentStatusFilter" class="form-control">
+                    <option value="">Tất cả</option>
+                    <option value="enrolled">Đang học</option>
+                    <option value="dropped">Đã rút</option>
+                    <option value="completed">Hoàn thành</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>&nbsp;</label>
+                <button type="button" class="btn-search" id="searchStudentBtn">
+                    <i class="fa-solid fa-search"></i> Tìm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="main-card">
+        <div class="table-responsive">
+            <table class="custom-table">
+                <thead id="studentsTableHead">
+                    <!-- Headers will be generated dynamically by JS -->
+                    <tr>
+                        <th>STT</th>
+                        <th>MSSV</th>
+                        <th>Họ và tên</th>
+                        <th>Email</th>
+                        <th>Chuyên ngành</th>
+                        <th>Năm nhập học</th>
+                        <th>Chuyên cần</th>
+                        <th>Loại đăng ký</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody id="studentsTableBody">
+                    <tr><td colspan="15" class="text-center"><i class="fa-solid fa-spinner fa-spin"></i> Đang tải...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="/js/modules/lecturer/academic/classStudent.js"></script>

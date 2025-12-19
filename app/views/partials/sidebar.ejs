@@ -1,0 +1,32 @@
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <button id="sidebar-toggle-btn" class="toggle-btn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="sidebar-logo-container">
+            <a href="#home" data-target="home-content">
+                <img src="/images/Logo1.png" alt="USTH Logo">
+            </a>
+        </div>
+    </div>
+
+    <ul class="nav-list">
+        <% if (navItems && Array.isArray(navItems)) { %>
+            <% navItems.forEach((item, index) => { %>
+            <li class="nav-item <%= index === 0 ? 'active' : '' %> <%= item.spacer ? 'nav-spacer' : '' %>">
+                <a href="<%= item.href || '#' %>" <% if (item.target) { %>data-target="<%= item.target %>"<% } %>>
+                    <i class="<%= item.icon || 'fa-solid fa-circle' %>"></i>
+                    <span data-i18n-key="<%= item.i18nKey || '' %>"><%= item.text || 'Menu Item' %></span>
+                </a>
+            </li>
+            <% }); %>
+        <% } else { %>
+            <li class="nav-item">
+                <a href="#home">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+        <% } %>
+    </ul>
+</nav>

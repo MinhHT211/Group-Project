@@ -1,0 +1,110 @@
+/* ===== Class List Styles ===== */
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.class-list-table {
+  font-size: 0.95rem;
+}
+
+.class-list-table th,
+.class-list-table td {
+  padding: 1rem 1.5rem;
+  vertical-align: middle;
+}
+
+.class-list-table thead th {
+  font-weight: 600;
+  color: #495057;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+/* Column widths */
+.col-no {
+  width: 5%;
+}
+
+.col-class-name {
+  width: 45%;
+}
+
+.col-code {
+  width: 25%;
+}
+
+.col-action {
+  width: 25%;
+  text-align: center;
+}
+
+/* Class info */
+.class-info {
+  padding: 0.5rem 0;
+}
+
+.class-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
+}
+
+.course-name {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+/* Badge */
+.class-code-badge {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  letter-spacing: 0.5px;
+}
+
+/* Button */
+.btn-grade {
+  padding: 0.5rem 1.25rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-grade:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Hover effect */
+.class-list-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.class-list-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .class-list-table th,
+  .class-list-table td {
+    padding: 0.75rem 1rem;
+  }
+
+  .class-name {
+    font-size: 0.9rem;
+  }
+
+  .course-name {
+    font-size: 0.8rem;
+  }
+
+  .btn-grade {
+    padding: 0.4rem 1rem;
+    font-size: 0.875rem;
+  }
+}

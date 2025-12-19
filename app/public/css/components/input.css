@@ -1,0 +1,55 @@
+/* .form-group {               
+    position: relative;
+    width: var(--input-width);            
+    margin: var(--spacing-10) auto;
+} */
+ .form-group {               
+    position: relative;
+    width: 100%;             /* chiếm hết chiều ngang khung */
+    max-width: 420px;        /* nhưng không quá 420px */
+    margin: var(--spacing-10) auto;
+}
+
+/* .form-group input {
+    width: 100%;             
+    height: var(--input-height);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    padding-left: 10px;
+} */
+
+.form-group input {
+    width: 100%;
+    height: 46px;            /* cao hơn chút cho dễ nhìn */
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    padding: 0 14px;
+    font-size: 15px;         /* chữ trong ô to hơn */
+}
+.form-group.inputpassword input {
+    padding-right: 40px;
+}
+
+/* Toggle password icon */
+#toggle-password,
+#toggle-password1 {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Error message */
+.error-message {
+    color: red;
+    font-size: 12px;
+    display: block;
+    text-align: left;
+    margin-top: 5px;
+}
+
+

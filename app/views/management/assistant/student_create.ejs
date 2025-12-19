@@ -1,0 +1,101 @@
+<div class="assistant-student-page" id="student-create-page">
+  <div class="page-title">Add New Student</div>
+
+  <div class="student-index-container">
+    <input type="hidden" id="current-department-id" value="<%= typeof departmentId !== 'undefined' ? departmentId : '' %>">
+    <form id="create-student-form" autocomplete="off" novalidate>
+      <h3>Account Information</h3>
+
+      <div>
+        <label for="username">Username</label>
+        <input id="username" name="username" required minlength="3" maxlength="100" placeholder="ex: s123456" />
+      </div>
+
+      <div>
+        <label for="password">Password (≥ 8 ký tự)</label>
+        <input id="password" name="password" type="password" minlength="8" maxlength="255" required placeholder="********" />
+      </div>
+
+      <div>
+        <label for="first_name">First name</label>
+        <input id="first_name" name="first_name" required minlength="1" maxlength="50" placeholder="Ngọc Anh" />
+      </div>
+
+      <div>
+        <label for="last_name">Last name</label>
+        <input id="last_name" name="last_name" required minlength="1" maxlength="50" placeholder="Nguyễn" />
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required maxlength="120"
+               placeholder="student@usth.edu.vn"
+               pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.edu\.vn$"
+               title="Chỉ chấp nhận email kết thúc bằng .edu.vn" />
+      </div>
+
+      <div>
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" type="tel" placeholder="09xxxxxxxx" inputmode="numeric" maxlength="15"
+               pattern="^(?:\+84|0)\d{9,10}$"
+               title="Số điện thoại VN: 0xxxxxxxxx hoặc +84xxxxxxxxx" />
+      </div>
+
+      <div>
+        <label for="date_of_birth">Date of birth</label>
+        <input id="date_of_birth" name="date_of_birth" type="date" max="2100-12-31" />
+      </div>
+
+      <div>
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" required>
+          <option value="" disabled selected>-- Select --</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+
+      <h3>Student Information</h3>
+
+      <div>
+        <label for="student_code">Student code</label>
+        <input id="student_code" name="student_code" required minlength="6" maxlength="20" />
+      </div>
+
+      <div>
+        <label for="major_name">Major</label>
+        <select id="major_name" name="major_name" required>
+          <option value="">-- Select major --</option>
+        </select>
+      </div>
+
+      <!-- Hidden: vẫn cần gửi lên API -->
+      <input type="hidden" id="major_id" name="major_id" />
+
+      <div>
+        <label for="Duration_year">Duration_year</label>
+        <input id="Duration_year" name="Duration_year" value="4" readonly />
+      </div>
+
+      <div>
+        <label for="degree_type">Degree type</label>
+        <input id="degree_type" name="degree_type" placeholder="Bachelor" disabled />
+      </div>
+
+      <div>
+        <label for="admission_year">Admission year</label>
+        <input id="admission_year" name="admission_year" type="number" min="2000" max="2100" step="1" required />
+      </div>
+
+      <div>
+        <label for="expected_graduation_year">Expected graduation year (optional)</label>
+        <input id="expected_graduation_year" name="expected_graduation_year" type="number" min="2000" max="2100" step="1" />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="create-new-btn">Add Student</button>
+        <a class="link-back" href="/assistant/student">Return to student list</a>
+      </div>
+    </form>
+  </div>
+</div>

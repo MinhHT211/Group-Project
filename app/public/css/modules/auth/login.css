@@ -1,0 +1,33 @@
+.form-container {
+    height: 400px;
+}
+
+/* Forgot password */
+/* .forgot-password {
+    max-width: 300px;
+    text-align: right;
+    font-size: var(--font-size-base);
+    text-transform: capitalize;
+    margin-top: var(--spacing-10);
+    cursor: pointer;
+    margin-left: 34px;
+} */
+
+.forgot-password {
+    display: block;          /* QUAN TRỌNG: để width hoạt động */
+    width: 100%;
+    max-width: 420px;        /* giống hệt .form-group */
+    margin: 5px auto 0;      /* căn giữa theo form */
+    text-align: right;       /* chữ dồn về mép phải */
+    font-size: var(--font-size-base);
+    text-transform: capitalize;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+/* Login signup text */
+.login-signup {
+    margin-top: var(--spacing-18);
+    font-size: var(--font-size-medium);
+}

@@ -1,0 +1,178 @@
+<div class="main-content">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-wrapper">
+        <div class="breadcrumb-nav">
+            <span class="breadcrumb-item">
+                <i class="fa-solid fa-book"></i> Khóa học
+            </span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span class="breadcrumb-item">
+                <i class="fa-solid fa-calendar-alt"></i> Học kỳ
+            </span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span class="breadcrumb-item active">Lớp học</span>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header-block">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <h2 class="page-title" style="margin: 0;">Lớp học</h2>
+        </div>
+        <button type="button" class="btn-primary-add" id="addClassBtn">
+            <i class="fa-solid fa-plus"></i> Thêm lớp học
+        </button>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-card">
+        <div class="filter-row">
+            <div class="filter-item flex-grow-1">
+                <label for="classSearch">Tìm kiếm</label>
+                <input type="text" id="classSearch" class="form-control" 
+                       placeholder="Mã lớp, tên lớp...">
+            </div>
+            <div class="filter-item">
+                <label for="lecturerFilter">Giảng viên</label>
+                <select id="lecturerFilter" class="form-control">
+                    <option value="">Tất cả giảng viên</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="classStatusFilter">Trạng thái</label>
+                <select id="classStatusFilter" class="form-control">
+                    <option value="">Tất cả</option>
+                    <option value="planning">Lên kế hoạch</option>
+                    <option value="open">Mở đăng ký</option>
+                    <option value="in_progress">Đang học</option>
+                    <option value="completed">Hoàn thành</option>
+                    <option value="cancelled">Đã hủy</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>&nbsp;</label>
+                <button type="button" class="btn-search" id="searchClassBtn">
+                    <i class="fa-solid fa-search"></i> Tìm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="margin-bottom: 15px; color: #666; font-size: 14px;">
+        Tổng: <strong id="totalClasses" style="color: #1565c0;">0</strong> lớp học
+    </div>
+
+    <!-- Table -->
+    <div class="main-card">
+        <div class="table-responsive">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th style="width: 70px;">STT</th>
+                        <th style="width: 200px;">Mã lớp</th>
+                        <th>Tên lớp</th>
+                        <th style="width: 120px;">Khóa học</th>
+                        <th style="width: 150px;">Học kỳ</th>
+                        <th style="width: 150px;">Giảng viên</th>
+                        <th style="width: 100px;" class="text-center">Sĩ số</th>
+                        <th style="width: 120px;">Loại</th>
+                        <th style="width: 120px;">Trạng thái</th>
+                        <th style="width: 150px;" class="text-center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="classTableBody">
+                    <tr><td colspan="9" class="text-center"><i class="fa-solid fa-spinner fa-spin"></i> Đang tải...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-wrapper" id="pagination-class"></div>
+    </div>
+
+    <!-- CLASS MODAL -->
+    <div class="modal-overlay" id="classModal">
+        <div class="modal-content">
+            <button type="button" class="close-modal-btn" data-modal="class">&times;</button>
+            <h2 class="modal-title" id="classModalTitle">Thêm lớp học</h2>
+            <form id="classForm">
+                <div class="form-grid-layout">
+                    <div class="form-col">
+                        <h4>Thông tin cơ bản</h4>
+                        <div class="form-group">
+                            <label>Mã lớp <span class="text-red">*</span></label>
+                            <input type="text" name="class_code" id="class_code" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tên lớp</label>
+                            <input type="text" name="class_name" id="class_name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Khóa học <span class="text-red">*</span></label>
+                            <select name="course_id" id="class_course_id" class="form-control" required>
+                                <option value="">-- Chọn --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Học kỳ <span class="text-red">*</span></label>
+                            <select name="semester_id" id="class_semester_id" class="form-control" required>
+                                <option value="">-- Chọn --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Giảng viên <span class="text-red">*</span></label>
+                            <select name="lecturer_id" id="lecturer_id" class="form-control" required>
+                                <option value="">-- Chọn --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <h4>Chi tiết</h4>
+                        <div class="form-group">
+                            <label>Sĩ số tối đa</label>
+                            <input type="number" name="max_capacity" id="max_capacity" class="form-control" value="50" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Loại lớp</label>
+                            <select name="class_type" id="class_type" class="form-control">
+                                <option value="regular">Thông thường</option>
+                                <option value="online">Trực tuyến</option>
+                                <option value="hybrid">Kết hợp</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Trạng thái</label>
+                            <select name="class_status" id="class_status" class="form-control">
+                                <option value="planning">Lên kế hoạch</option>
+                                <option value="open">Mở đăng ký</option>
+                                <option value="in_progress">Đang học</option>
+                                <option value="completed">Hoàn thành</option>
+                                <option value="cancelled">Đã hủy</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày bắt đầu <span class="text-red">*</span></label>
+                            <input type="date" name="start_date" id="start_date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày kết thúc <span class="text-red">*</span></label>
+                            <input type="date" name="end_date" id="end_date" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>URL giáo trình</label>
+                    <input type="url" name="syllabus_url" id="syllabus_url" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Ghi chú</label>
+                    <textarea name="notes" id="notes" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="modal-actions-footer">
+                    <button type="button" class="btn-cancel" data-modal="class">Hủy</button>
+                    <button type="submit" class="btn-save"><i class="fa-solid fa-save"></i> Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="module" src="/js/modules/assistant/academic/class.js"></script>

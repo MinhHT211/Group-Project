@@ -1,0 +1,36 @@
+//setup extension for project
+npm init -y
+npm install express ejs express-ejs-layouts         
+
+npm install dotenv                                  
+npm install mysql2                                 
+npm install bootstrap                               
+npm install sequelize sequelize-cli                 
+npx sequelize-cli init                              
+npm install jsonwebtoken                           
+npm install bcryptjs                               
+npm install express-useragent                       
+npm install connect-ensure-login
+npm install cookie-parser
+npm install express-session
+
+//Run
+npm start
+npx sequelize-cli db:migrate             
+npx sequelize-cli db:seed:all            
+
+//Update migrate and seeder new
+npx sequelize-cli db:migrate:undo:all
+npx sequelize-cli db:seed:undo:all
+
+//.env
+--------------
+PORT=8080
+NODE_ENV=development
+    
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=
+DB_NAME=management
+DB_PORT=3306
+--------------

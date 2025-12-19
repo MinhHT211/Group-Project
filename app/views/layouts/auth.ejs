@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+  <!-- Base CSS -->
+  <link rel="stylesheet" href="/css/base/variable.css">
+  <link rel="stylesheet" href="/css/base/reset.css">
+  
+
+  <!-- Components CSS -->
+  <link rel="stylesheet" href="/css/components/logo.css">
+  <link rel="stylesheet" href="/css/components/input.css">
+  <link rel="stylesheet" href="/css/components/button.css">
+
+  <!-- Auth Common CSS -->
+  <link rel="stylesheet" href="/css/modules/auth/auth-common.css">
+
+  <!-- Notifications -->
+  <link rel="stylesheet" href="/css/components/toast.css">
+
+  <!-- Page specific CSS -->
+  <% if (locals.pageCSS) { %>
+    <link rel="stylesheet" href="<%= pageCSS %>">
+    <% } %>
+
+      <title>
+        <%= title || 'Auth' %>
+      </title>
+</head>
+
+<body>
+  <%- body %>
+
+    <!-- Page specific JS -->
+    <% if (locals.pageJS) { %>
+      <script src="<%= pageJS %>"></script>
+      <% } %>
+
+    <%- include('../partials/toast_container') %>
+    
+</body>
+
+</html>

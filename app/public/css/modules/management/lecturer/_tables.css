@@ -1,0 +1,95 @@
+/* --- Style chung cho các bảng dữ liệu (Danh sách lớp, Điểm danh) --- */
+
+.page-title-header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+.page-title-header h2 {
+    margin: 0 0 5px 0;
+    color: #333;
+}
+
+.page-title-header p {
+    margin: 0;
+    color: #666;
+}
+
+.table-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Đảm bảo bảng không bị co quá nhỏ */
+}
+
+.data-table thead th {
+    background-color: #f8f9fa;
+    color: #444;
+    font-weight: 600;
+    text-align: left;
+    padding: 15px;
+    border-bottom: 2px solid #eee;
+}
+
+.data-table tbody td {
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Badge trạng thái (Ví dụ: Có mặt/Vắng) */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-badge.success {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-badge.warning {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* CSS cho bảng danh sách sinh viên */
+.student-list-table th {
+    background-color: #f4f6f8; /* Màu nền header xám nhẹ giống ảnh */
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.student-list-table td {
+    vertical-align: middle;
+    font-size: 0.9rem;
+}
+
+.student-list-table .text-center {
+    text-align: center;
+}
+
+/* Tô màu xanh cho điểm trung bình */
+.score-highlight {
+    color: #0052cc;
+    font-weight: 700;
+}
+
+/* Chỉnh lại input search trong toolbar */
+.toolbar-row .search-bar input {
+    background-color: #fff;
+    width: 100%;
+}

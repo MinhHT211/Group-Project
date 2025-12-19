@@ -1,0 +1,288 @@
+<div class="container-fluid py-4">
+  
+  <!-- Page Header -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="page-title mb-1"><%= className %></h2>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item">
+                <a href="/assistant/grade">Danh sách lớp</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Quản lý điểm
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alert Messages -->
+  <% if (upload === 'success') { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <i class="bi bi-check-circle-fill me-2"></i>
+      Upload Excel thành công!
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  <% } %>
+
+  <% if (upload === 'wrong_class') { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      File Excel không đúng lớp!
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  <% } %>
+
+  <% if (upload === 'invalid_file') { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      File Excel không hợp lệ!
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  <% } %>
+
+  <% if (errorMessage) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      <%= errorMessage %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  <% } %>
+
+  <!-- Action Bar -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <div class="action-bar">
+        <button class="btn btn-outline-primary" onclick="openWeightModal()">
+          <i class="bi bi-sliders me-2"></i>
+          Cấu hình trọng số điểm
+        </button>
+
+        <button class="btn btn-outline-success" 
+                onclick="window.location='/assistant/<%= classId %>/students/grades/export'">
+          <i class="bi bi-download me-2"></i>
+          Tải file Excel mẫu
+        </button>
+
+        <form action="/assistant/grade/<%= classId %>/students/grades/import"
+              method="POST"
+              enctype="multipart/form-data"
+              class="upload-form">
+          <input type="file" 
+                 name="file" 
+                 accept=".xlsx" 
+                 required 
+                 class="form-control form-control-sm"
+                 id="fileInput">
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-upload me-2"></i>
+            Upload Excel
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grade Table -->
+  <div class="card shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover grade-table mb-0" data-class-id="<%= classId %>">
+          <thead class="table-light">
+            <tr>
+              <th class="text-center">STT</th>
+              <th>Họ và tên</th>
+              <th class="text-center">Mã SV</th>
+              <th class="text-center">Ngày sinh</th>
+              <th>Chuyên ngành</th>
+              <th class="text-center">Chuyên cần</th>
+              
+              <% if (gradeWeights.mini_test > 0) { %>
+                <th class="text-center">Mini test</th>
+              <% } %>
+
+              <% if (gradeWeights.assignment > 0) { %>
+                <th class="text-center">Assignment</th>
+              <% } %>
+
+              <% if (gradeWeights.lab_work > 0) { %>
+                <th class="text-center">Lab work</th>
+              <% } %>
+
+              <% if (gradeWeights.midterm > 0) { %>
+                <th class="text-center">Giữa kỳ</th>
+              <% } %>
+
+              <% if (gradeWeights.final > 0) { %>
+                <th class="text-center">Cuối kỳ</th>
+              <% } %>
+              
+              <th class="text-center">Trung bình</th>
+              <th class="text-center">Điểm chữ</th>
+              <th class="text-center">GPA</th>
+              <th>Ghi chú</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% if (data && data.length > 0) { %>
+              <% data.forEach((s, index) => { 
+                const fullName = `${s.student?.user?.first_name || ""} ${s.student?.user?.last_name || ""}`.trim();
+              %>
+                <tr>
+                  <td class="text-center"><%= index + 1 %></td>
+                  <td><%= fullName || "-" %></td>
+                  <td class="text-center"><%= s.student?.student_code || "-" %></td>
+                  <td class="text-center"><%= s.student?.user?.date_of_birth || "—" %></td>
+                  <td><%= s.student?.major?.major_name || "—" %></td>
+                  <td class="text-center"><%= (s.attendance_display ?? 0).toFixed(2) %></td>
+
+                  <!-- Editable Grade Cells -->
+                  <% if (gradeWeights.mini_test > 0) { %>
+                    <td class="text-center editable"
+                        data-field="mini_test_grade"
+                        data-id="<%= s.enrollment_id %>">
+                      <%= s.mini_test_grade ?? "" %>
+                    </td>
+                  <% } %>
+
+                  <% if (gradeWeights.assignment > 0) { %>
+                    <td class="text-center editable"
+                        data-field="assignment_grade"
+                        data-id="<%= s.enrollment_id %>">
+                      <%= s.assignment_grade ?? "" %>
+                    </td>
+                  <% } %>
+
+                  <% if (gradeWeights.lab_work > 0) { %>
+                    <td class="text-center editable"
+                        data-field="lab_work_grade"
+                        data-id="<%= s.enrollment_id %>">
+                      <%= s.lab_work_grade ?? "" %>
+                    </td>
+                  <% } %>
+
+                  <% if (gradeWeights.midterm > 0) { %>
+                    <td class="text-center editable"
+                        data-field="midterm_grade"
+                        data-id="<%= s.enrollment_id %>">
+                      <%= s.grades_summary?.midterm ?? "" %>
+                    </td>
+                  <% } %>
+
+                  <% if (gradeWeights.final > 0) { %>
+                    <td class="text-center editable"
+                        data-field="final_grade"
+                        data-id="<%= s.enrollment_id %>">
+                      <%= s.grades_summary?.final ?? "" %>
+                    </td>
+                  <% } %>
+
+                  <!-- Read-only Summary Cells -->
+                  <td class="text-center readonly">
+                    <%= s.grades_summary?.total ?? "" %>
+                  </td>
+                  <td class="text-center readonly">
+                    <%= s.grades_summary?.letter ?? "" %>
+                  </td>
+                  <td class="text-center readonly">
+                    <%= s.grades_summary?.gpa ?? "" %>
+                  </td>
+
+                  <td class="editable" 
+                      data-field="notes" 
+                      data-id="<%= s.enrollment_id %>">
+                    <%= s.notes ?? "" %>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="20" class="text-center py-5 text-muted">
+                  <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                  Không có dữ liệu sinh viên
+                </td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bulk Actions -->
+  <div class="bulk-actions mt-4">
+    <button class="btn btn-success btn-lg" onclick="saveAll()">
+      <i class="bi bi-save me-2"></i>
+      Lưu tất cả
+    </button>
+    <button class="btn btn-secondary btn-lg" onclick="location.reload()">
+      <i class="bi bi-arrow-clockwise me-2"></i>
+      Hủy
+    </button>
+  </div>
+
+</div>
+
+<!-- Weight Configuration Modal -->
+<div id="weightModal" class="modal-overlay">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cấu hình trọng số điểm</h5>
+        <button type="button" class="btn-close" onclick="closeWeightModal()"></button>
+      </div>
+      
+      <div class="modal-body">
+        <table class="table table-bordered weight-table">
+          <thead class="table-light">
+            <tr>
+              <th>Đầu điểm</th>
+              <th class="text-center" style="width: 40%;">Trọng số (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% gradeComponents.forEach(c => { %>
+              <tr>
+                <td><%= c.component_name %></td>
+                <td class="text-center">
+                  <input type="number"
+                         step="1"
+                         min="0"
+                         max="100"
+                         value="<%= c.weight * 100 %>"
+                         class="form-control form-control-sm weight-input"
+                         data-id="<%= c.component_id %>"
+                         data-type="<%= c.component_type %>">
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+          <tfoot>
+            <tr class="table-light">
+              <td class="text-end fw-bold">Tổng:</td>
+              <td class="text-center">
+                <span id="totalWeight" class="fw-bold">100</span>%
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeWeightModal()">
+          Hủy
+        </button>
+        <button type="button" class="btn btn-primary" onclick="confirmSaveWeights()">
+          Lưu
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="module" src="/js/modules/assistant/grades.js"></script>

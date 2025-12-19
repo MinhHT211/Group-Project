@@ -1,0 +1,46 @@
+{
+  "name": "workplace",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "management system for school",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "bootstrap": "^5.3.8",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.18.2",
+    "express-useragent": "^2.0.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.18.2",
+    "multer": "^2.0.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.15.3",
+    "nodemailer": "^7.0.11",
+    "nodemon": "^3.1.11",
+    "readdirp": "^5.0.0",
+    "sequelize": "^6.37.7",
+    "sequelize-cli": "^6.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hoangvu2911/school-management-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hoangvu2911/school-management-system/issues"
+  },
+  "homepage": "https://github.com/Hoangvu2911/school-management-system#readme",
+  "type": "commonjs"
+}

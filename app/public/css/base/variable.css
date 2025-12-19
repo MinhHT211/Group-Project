@@ -1,0 +1,40 @@
+:root {
+    /* Colors */
+    --primary-color: #3899e8f8;
+    --text-color: #000000;
+    --text-secondary: #999ea2f8;
+    --bg-white: #ffffff;
+    --border-color: #ccc;
+    
+    /* Spacing */
+    --spacing-10: 10px;
+    --spacing-15: 15px;
+    --spacing-18: 18px; 
+    --spacing-20: 20px;
+    --spacing-30: 30px;
+    --spacing-50: 50px;
+    
+    /* Sizes */
+     --form-width: 380px;      /* trước là 380px */
+    --input-height: 40px;     /* trước 40px */
+    --input-width: 290px;     /* trước 290px */
+    --button-width: 300px;    /* trước 300px */
+    --button-height: 40px;    /* trước 40px */
+    
+    /* Border radius */
+    /* --border-radius: 10px; */
+    --border-radius: 14px;
+    
+    /* Font sizes */
+    --font-size-small: 10px;
+    --font-size-medium: 13px;
+    --font-size-base: 14px;
+    --font-size-large: 15px;
+    --font-size-button: 20px;
+    --font-size-button-large: 23px;
+    --font-size-title: 27px;
+    --font-size-title-large: 40px;
+    
+    /* Shadows */
+    --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}

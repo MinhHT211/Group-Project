@@ -1,0 +1,14 @@
+.form-container {
+    height: 580px;
+}
+
+/* Login signup text */
+.login-signup {
+    margin-top: var(--spacing-18);
+    font-size: var(--font-size-medium);
+}
+
+/* Button spacing */
+.login-btn-sign-in {
+    margin-top: var(--spacing-30);
+}
